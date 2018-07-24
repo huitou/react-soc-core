@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { ITrigger } from './interface-trigger';
@@ -77,8 +77,6 @@ export default class LTrigger extends Component {
     }
 
     render() {
-        return (
-            <div>LTrigger</div>
-        );
+        return null;
     }
 }
