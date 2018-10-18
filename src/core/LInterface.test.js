@@ -2,7 +2,7 @@ import LInterface, { DEFAULT_HEFC, DEFAULT_ROLE } from './LInterface';
 
 describe('LInterface', () => {
 
-    describe('has its own definition of handle presence', () => {
+    describe('as abstract logic interface', () => {
         let interfaceInstance
         beforeEach(() => {
             interfaceInstance = new LInterface();
@@ -29,9 +29,17 @@ describe('LInterface', () => {
             expect(interfaceInstance._isHifpHandleDefined('whatever')).toEqual(false)
         });
 
+        // TODO_INI: a better error construct is needed.
         it('throws an error on any hefc call', () => {
             expect(() => interfaceInstance.callHefc('whatever')).toThrow()
         });
+        it('throws an error on any hefp call', () => {
+            expect(() => interfaceInstance.callHefp('whatever')).toThrow()
+        });
+        it('throws an error on any hifp call', () => {
+            expect(() => interfaceInstance.callHifp('whatever')).toThrow()
+        });
+        // TODO_FIN
     });
 
     describe(', when instantiated without parameters, ', () => {

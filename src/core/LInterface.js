@@ -47,9 +47,11 @@ class LInterface {
       );
 
     // hefc, hefp and hifp invocation logging:
+    // TODO_INI: better logging to be defined.
     this._hefcLog = (handle, params, res) => {};
     this._hefpLog = (handle, params, res) => {};
     this._hifpLog = (handle, params, res) => {};
+    // TODO_FIN
   }
 
   role = () => this._role;
@@ -57,6 +59,7 @@ class LInterface {
   hefp = () => this._ref && this._ref.current && this._ref.current.hefp;
   hifp = () => this._ref && this._ref.current && this._ref.current.hifp;
 
+  // TODO_INI: a better error construct is needed.
   callHefc = (handle, params = {}) => {
     if (this._isHefcHandleDefined(handle) && this._isHefcHandleAvailable(handle)) {
       const res = this._hefc[handle](...params);
@@ -96,6 +99,7 @@ class LInterface {
       );
     }
   };
+  // TODO_FIN
 }
 
 export default LInterface;
