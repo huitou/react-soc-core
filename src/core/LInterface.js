@@ -16,27 +16,35 @@ export const DEFAULT_HEFC = {};
 
 class LInterface {
   constructor(hefc = {}, role = DEFAULT_ROLE) {
+    this._hefc_handle_presence = hefc_handle_presence;
+    this._hefp_handle_presence = hefp_handle_presence;
+    this._hifp_handle_presence = hifp_handle_presence;
+
     this._role = role;
     this._hefc = hefc;
     this._ref = undefined;
 
     // hefc, hefp and hifp shape check:
-    this._isHefcHandle = handle => hefc_handle_presence[handle];
-    this._isHefpHandle = handle => hefp_handle_presence[handle];
-    this._isHifpHandle = handle => hifp_handle_presence[handle];
+    this._isHefcHandle = handle => !!hefc_handle_presence[handle];
+    this._isHefpHandle = handle => !!hefp_handle_presence[handle];
+    this._isHifpHandle = handle => !!hifp_handle_presence[handle];
 
     // hefc, hefp and hifp handle availability check:
-    this._isHefcHandleAvailable = handle => this._hefc[handle];
+    this._isHefcHandleAvailable = handle => !!this._hefc[handle];
     this._isHefpHandleAvailable = handle =>
-      this._ref &&
-      this._ref.current &&
-      this._ref.current.hefp &&
-      this._ref.current.hefp[handle];
+      !!(
+        this._ref &&
+        this._ref.current &&
+        this._ref.current.hefp &&
+        this._ref.current.hefp[handle]
+      );
     this._isHifpHandleAvailable = handle =>
-      this._ref &&
-      this._ref.current &&
-      this._ref.current.hifp &&
-      this._ref.current.hifp[handle];
+      !!(
+        this._ref &&
+        this._ref.current &&
+        this._ref.current.hifp &&
+        this._ref.current.hifp[handle]
+      );
 
     // hefc, hefp and hifp invocation logging:
     this._hefcLog = (handle, params, res) => {};
