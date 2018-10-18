@@ -11,8 +11,11 @@ const hifp_handle_presence = {
   /* handle_name: true/false, */
 };
 
+export const DEFAULT_ROLE = { name: "default" };
+export const DEFAULT_HEFC = {};
+
 class LInterface {
-  constructor(hefc, role) {
+  constructor(hefc = {}, role = DEFAULT_ROLE) {
     this._role = role;
     this._hefc = hefc;
     this._ref = undefined;
@@ -23,7 +26,7 @@ class LInterface {
     this._isHifpHandle = handle => hifp_handle_presence[handle];
 
     // hefc, hefp and hifp handle availability check:
-    this._isHefcHandleAvailable = handle => this._href[handle];
+    this._isHefcHandleAvailable = handle => this._hefc[handle];
     this._isHefpHandleAvailable = handle =>
       this._ref &&
       this._ref.current &&
@@ -42,7 +45,11 @@ class LInterface {
   }
 
   role = () => this._role;
-  hefc = (handle, params) => {
+  hefc = () => this._hefc;
+  hefp = () => this._ref && this._ref.current && this._ref.current.hefp;
+  hifp = () => this._ref && this._ref.current && this._ref.current.hifp;
+
+  callHefc = (handle, params = {}) => {
     if (this._isHefcHandle(handle) && this._isHefcHandleAvailable(handle)) {
       const res = this._hefc[handle](...params);
       this._hefcLog(handle, params, res);
@@ -55,7 +62,7 @@ class LInterface {
       );
     }
   };
-  hefp = (handle, params) => {
+  callHefp = (handle, params) => {
     if (this._isHefpHandle(handle) && this._isHefpHandleAvailable(handle)) {
       const res = this._ref.current.hefp[handle](...params);
       this._hefpLog(handle, params, res);
@@ -68,7 +75,7 @@ class LInterface {
       );
     }
   };
-  hifp = (handle, params) => {
+  callHifp = (handle, params) => {
     if (this._isHifpHandle(handle) && this._isHifpHandleAvailable(handle)) {
       const res = this._ref.current.hifp[handle](...params);
       this._hifpLog(handle, params, res);
