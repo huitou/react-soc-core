@@ -8,25 +8,25 @@ describe('LInterface', () => {
             interfaceInstance = new LInterface();
         })
 
-        it('has NOT defined presence of any handles in its hefc', () => {
-            expect(Object.keys(interfaceInstance._hefc_handle_presence).length).toEqual(0)
+        it('has NOT defined any handles in its hefc', () => {
+            expect(Object.keys(interfaceInstance._hefc_handle_definition).length).toEqual(0)
         });
-        it('returns false on presence check of any handle on hefc', () => {
-            expect(interfaceInstance._isHefcHandle('whatever')).toEqual(false)
-        });
-
-        it('has NOT defined presence of any handles in its hefp', () => {
-            expect(Object.keys(interfaceInstance._hefp_handle_presence).length).toEqual(0)
-        });
-        it('returns false on presence check of any handle on hefp', () => {
-            expect(interfaceInstance._isHefpHandle('whatever')).toEqual(false)
+        it('returns false on definition check of any handle on hefc', () => {
+            expect(interfaceInstance._isHefcHandleDefined('whatever')).toEqual(false)
         });
 
-        it('has NOT defined presence of any handles in its hifp', () => {
-            expect(Object.keys(interfaceInstance._hifp_handle_presence).length).toEqual(0)
+        it('has NOT defined handles in its hefp', () => {
+            expect(Object.keys(interfaceInstance._hefp_handle_definition).length).toEqual(0)
         });
-        it('returns false on presence check of any handle on hifp', () => {
-            expect(interfaceInstance._isHifpHandle('whatever')).toEqual(false)
+        it('returns false on definition check of any handle on hefp', () => {
+            expect(interfaceInstance._isHefpHandleDefined('whatever')).toEqual(false)
+        });
+
+        it('has NOT defined any handles in its hifp', () => {
+            expect(Object.keys(interfaceInstance._hifp_handle_definition).length).toEqual(0)
+        });
+        it('returns false on definition check of any handle on hifp', () => {
+            expect(interfaceInstance._isHifpHandleDefined('whatever')).toEqual(false)
         });
 
         it('throws an error on any hefc call', () => {
