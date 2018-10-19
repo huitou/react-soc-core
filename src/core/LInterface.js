@@ -15,7 +15,7 @@ export const DEFAULT_ROLE = { name: "default" };
 export const DEFAULT_HEFC = {};
 
 class LInterface {
-  constructor(hefc = {}, role = DEFAULT_ROLE) {
+  constructor(hefc = DEFAULT_HEFC, role = DEFAULT_ROLE) {
     this._hefc_handle_definition = hefc_handle_definition;
     this._hefp_handle_definition = hefp_handle_definition;
     this._hifp_handle_definition = hifp_handle_definition;
@@ -61,7 +61,10 @@ class LInterface {
 
   // TODO_INI: a better error construct is needed.
   callHefc = (handle, params = {}) => {
-    if (this._isHefcHandleDefined(handle) && this._isHefcHandleAvailable(handle)) {
+    if (
+      this._isHefcHandleDefined(handle) &&
+      this._isHefcHandleAvailable(handle)
+    ) {
       const res = this._hefc[handle](...params);
       this._hefcLog(handle, params, res);
       return res;
@@ -74,7 +77,10 @@ class LInterface {
     }
   };
   callHefp = (handle, params) => {
-    if (this._isHefpHandleDefined(handle) && this._isHefpHandleAvailable(handle)) {
+    if (
+      this._isHefpHandleDefined(handle) &&
+      this._isHefpHandleAvailable(handle)
+    ) {
       const res = this._ref.current.hefp[handle](...params);
       this._hefpLog(handle, params, res);
       return res;
@@ -87,7 +93,10 @@ class LInterface {
     }
   };
   callHifp = (handle, params) => {
-    if (this._isHifpHandleDefined(handle) && this._isHifpHandleAvailable(handle)) {
+    if (
+      this._isHifpHandleDefined(handle) &&
+      this._isHifpHandleAvailable(handle)
+    ) {
       const res = this._ref.current.hifp[handle](...params);
       this._hifpLog(handle, params, res);
       return res;
