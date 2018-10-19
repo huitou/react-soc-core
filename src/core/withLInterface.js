@@ -4,11 +4,11 @@ export const withLInterface = (ChildComponent, LInterface) => (
   hefc,
   role
 ) => props => {
-  const interface = new LInterface(hefc, role);
+  const lInterface = new LInterface(hefc, role);
   const ref = React.createRef();
 
-  interface._ref = ref;
-  role.interface = interface; // This is a cyclic reference.
+  lInterface._ref = ref;
+  role.interface = lInterface; // This is a cyclic reference.
 
-  return <ChildComponent ref={ref} interface={interface} {...props} />;
+  return <ChildComponent ref={ref} lInterface={lInterface} {...props} />;
 };
