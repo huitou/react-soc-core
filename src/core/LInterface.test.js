@@ -31,13 +31,13 @@ describe('LInterface', () => {
 
         // TODO_INI: a better error construct is needed.
         it('throws an error on any hefc call', () => {
-            expect(() => interfaceInstance.callHefc('whatever')).toThrow()
+            expect(() => interfaceInstance.callHefc('whatever')).toThrow(/hefc/)
         });
         it('throws an error on any hefp call', () => {
-            expect(() => interfaceInstance.callHefp('whatever')).toThrow()
+            expect(() => interfaceInstance.callHefp('whatever')).toThrow(/hefp/)
         });
         it('throws an error on any hifp call', () => {
-            expect(() => interfaceInstance.callHifp('whatever')).toThrow()
+            expect(() => interfaceInstance.callHifp('whatever')).toThrow(/hifp/)
         });
         // TODO_FIN
     });
