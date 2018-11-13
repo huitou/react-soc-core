@@ -25,9 +25,12 @@ class LInterface {
     this._ref = undefined;
 
     // hefc, hefp and hifp shape check:
-    this._isHefcHandleDefined = handle => !!hefc_handle_definition[handle];
-    this._isHefpHandleDefined = handle => !!hefp_handle_definition[handle];
-    this._isHifpHandleDefined = handle => !!hifp_handle_definition[handle];
+    this._isHefcHandleDefined = handle =>
+      !!this._hefc_handle_definition[handle];
+    this._isHefpHandleDefined = handle =>
+      !!this._hefp_handle_definition[handle];
+    this._isHifpHandleDefined = handle =>
+      !!this._hifp_handle_definition[handle];
 
     // hefc, hefp and hifp handle availability check:
     this._isHefcHandleAvailable = handle => !!this._hefc[handle];
