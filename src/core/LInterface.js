@@ -18,22 +18,37 @@ class LInterface {
     }
 */ 
 
-  constructor({ register, name }) {
-    this._parentRegister = register;
-    this._name = namne;
-
-    this._ref = undefined;
-
+  constructor({ name, register }) {
+    this._name = name;
+    this._parentInterfaceRegister = register;
+    this._changeEventHandle = this._parentInterfaceRegister(this);
+    this._isChangeEventSwitchOn = true;
     this._childLInterfaces = [];
-    this._changeEventHandle = this._register(this);
   }
 
-  ownRegister = (childLInterface) => {
-    this.__childLInterfaces.push(childLInterface);
+  setChangeEventSwitchOn = () => {
+    this._isChangeEventSwitchOn = true;
+  };
+  setChangeEventSwitchOff = () => {
+    this._isChangeEventSwitchOn = false;
   };
 
-  hefu = () => this._ref && this._ref.current && this._ref.current.hefu;
-  hifu = () => this._ref && this._ref.current && this._ref.current.hifu;
+  changeEveneHandle = () => {
+    if (this._isChangeEventSwitchOn) {
+      this._changeEventHandle();
+    }
+  };
+
+  hfuRegister = ({ hefu, hifu }) => {
+    this.hfu = { hefu, hifu };
+  };
+  hfuUnregister = () => {
+    this.hfu = undefined;
+  };
+
+  childInterfaceRegister = (childLInterface) => {
+    this.__childLInterfaces.push(childLInterface);
+  };
 }
 
 export default LInterface;
