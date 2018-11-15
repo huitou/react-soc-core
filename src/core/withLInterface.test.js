@@ -4,12 +4,15 @@ import { shallow, mount } from "enzyme";
 import LInterface from "./LInterface";
 import { withLInterface } from "./withLInterface";
 
+let lInterface;
 const NAME = 'TestInterface';
 const parentChangeEventHandleMock = jest.fn();
-const parentRegisterMock = jest.fn().mockReturnValue(parentChangeEventHandleMock);
-
+const parentRegisterMock = jest.fn((interfaceInstance) => {
+  lInterface = interfaceInstance;
+  return parentChangeEventHandleMock;
+});
 const ldConfig = {
-  name: NamedNodeMap,
+  name: NAME,
   register: parentRegisterMock,
 }
 
@@ -35,29 +38,47 @@ describe("withLInterface function", () => {
   });
 
   describe("when the function component is mounted with proper props", () => {
-    it("render a extended component with the wrapped logic component content", () => {
-      const parentChangeEventHandleMock = jest.fn();
-      const parentRegisterMock = jest.fn().mockReturnValue(parentChangeEventHandleMock);
 
-      const FunctionComponent = withLInterface(LInterface)(LogicComponent);
-      const enzymeWrapper = mount(<FunctionComponent ldConfig={ldConfig} />);
-      const enzymeWrapper_ExtendedComponent = enzymeWrapper.find('ExtendedComponent');
+    let FunctionComponent, enzymeWrapper, enzymeWrapper_ExtendedComponent;
+    beforeEach(() => {
+      lInterface = undefined;
+      FunctionComponent = withLInterface(LInterface)(LogicComponent);
+      enzymeWrapper = mount(<FunctionComponent ldConfig={ldConfig} />);
+      enzymeWrapper_ExtendedComponent = enzymeWrapper.find('ExtendedComponent');
+    });
 
+    it("render an extended component with the wrapped logic component content", () => {
       expect(enzymeWrapper_ExtendedComponent.length).toBe(1);
       expect(enzymeWrapper.find('.test').length).toBe(1);
     });
 
-    it("render a extended component passing lInterface prop", () => {
-      const parentChangeEventHandleMock = jest.fn();
-      const parentRegisterMock = jest.fn().mockReturnValue(parentChangeEventHandleMock);
-
-      const FunctionComponent = withLInterface(LInterface)(LogicComponent);
-      const enzymeWrapper = mount(<FunctionComponent ldConfig={ldConfig} />);
-      const enzymeWrapper_ExtendedComponent = enzymeWrapper.find('ExtendedComponent');
-
+    it("render an extended component passing lInterface prop", () => {
+      expect(enzymeWrapper_ExtendedComponent.length).toBe(1);
       expect(enzymeWrapper_ExtendedComponent.prop('lInterface')).toBeDefined();
       expect(enzymeWrapper_ExtendedComponent.prop('ldConfig')).not.toBeDefined();
     });
+
+    it("parentRegister is called", () => {
+      expect(parentRegisterMock).toHaveBeenCalled();
+    });
+
+    it("the lInterface's _changeEventHandle is registered", () => {
+      expect(lInterface._changeEventHandle).toBeDefined();
+    });
+
+    it("the wrapped logic component's hfu is registered in lInterface", () => {
+      expect(lInterface.hfu).toBeDefined();
+    });
   });
 
+  describe("when the function component is unmounted", () => {
+    it("lInterface's hfu is unregistered", () => {
+      lInterface = undefined;
+      const FunctionComponent = withLInterface(LInterface)(LogicComponent);
+      const enzymeWrapper = mount(<FunctionComponent ldConfig={ldConfig} />);
+      enzymeWrapper.unmount();
+
+      expect(lInterface.hfu).not.toBeDefined();
+    });
+  });
 });

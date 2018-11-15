@@ -47,7 +47,7 @@ class LInterface {
   };
 
   childInterfaceRegister = (childLInterface) => {
-    this.__childLInterfaces.push(childLInterface);
+    this._childLInterfaces.push(childLInterface);
   };
 }
 
