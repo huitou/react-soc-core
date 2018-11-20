@@ -17,8 +17,16 @@ const ldConfig = {
 }
 
 class LogicComponent extends Component {
+  state = { test: true };
+
+  handleClick = () => {
+    this.setState(
+      (state) => ({ test: !state.test })
+    );
+  };
+
   render() {
-    return <div className='test' onClick={() => {}}/>;
+    return <div className='test' onClick={this.handleClick}/>;
   }
 }
 
@@ -46,6 +54,9 @@ describe("withLInterface function", () => {
       enzymeWrapper = mount(<FunctionComponent ldConfig={ldConfig} />);
       enzymeWrapper_ExtendedComponent = enzymeWrapper.find('ExtendedComponent');
     });
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
 
     it("render an extended component with the wrapped logic component content", () => {
       expect(enzymeWrapper_ExtendedComponent.length).toBe(1);
@@ -68,6 +79,10 @@ describe("withLInterface function", () => {
 
     it("the wrapped logic component's hfu is registered in lInterface", () => {
       expect(lInterface.hfu).toBeDefined();
+    });
+
+    it("the parent's change event handle has benn called once", () => {
+      expect(parentChangeEventHandleMock).toHaveBeenCalledTimes(1);
     });
   });
 

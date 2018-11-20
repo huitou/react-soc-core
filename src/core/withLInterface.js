@@ -21,6 +21,7 @@ export const withLInterface = (LInterface) => (WrappedComponent) => (props) => {
       lInterface.setChangeEventSwitchOff();
       const content = super.render ? super.render() : null;
       lInterface.setChangeEventSwitchOn();
+      lInterface.changeEveneHandle();
       return content;
     }
   }
