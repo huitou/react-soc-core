@@ -15,6 +15,14 @@ export const withLInterface = (LInterface) => (WrappedComponent) => (props) => {
       lInterface.hfuUnregister();
       super.componentWillUnmount && super.componentWillUnmount();
     }
+
+    render() {
+      const { lInterface } = this.props;
+      lInterface.setChangeEventSwitchOff();
+      const content = super.render ? super.render() : null;
+      lInterface.setChangeEventSwitchOn();
+      return content;
+    }
   }
 
   return (
