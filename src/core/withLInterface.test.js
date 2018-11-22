@@ -17,6 +17,7 @@ const rootLdConfig = {
   register: parentRegisterMock,
 }
 
+const LEVEL = 1;
 class LogicComponent extends Component {
   static propTypes = {
     level: PropTypes.number,
@@ -62,8 +63,6 @@ describe("withLInterface function", () => {
   });
 
   describe("when the function component is mounted with proper props", () => {
-
-    const LEVEL = 1;
     let FunctionComponent, enzymeWrapper, enzymeWrapper_ExtendedComponent;
     beforeEach(() => {
       rootlInterface = undefined;
@@ -113,7 +112,7 @@ describe("withLInterface function", () => {
     it("lInterface's hfu is unregistered", () => {
       rootlInterface = undefined;
       const FunctionComponent = withLInterface(LInterface)(LogicComponent);
-      const enzymeWrapper = mount(<FunctionComponent ldConfig={rootLdConfig} />);
+      const enzymeWrapper = mount(<FunctionComponent ldConfig={rootLdConfig} level={LEVEL} />);
       enzymeWrapper.unmount();
 
       expect(rootlInterface.hfu).not.toBeDefined();
