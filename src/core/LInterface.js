@@ -7,8 +7,6 @@
   Please add copyright here.
 */
 
-import React from "react";
-
 class LInterface {
 /*
   An interface constructor expects a configuration object of the following shape:
