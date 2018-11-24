@@ -4,7 +4,7 @@
   used as base class for concrete LInterfaces.
 
   ...
-  Please add copy right here.
+  Please add copyright here.
 */
 
 import React from "react";
@@ -48,6 +48,7 @@ class LInterface {
 
   childInterfaceRegister = (childLInterface) => {
     this._childLInterfaces.push(childLInterface);
+    return this.changeEveneHandle;
   };
 }
 
