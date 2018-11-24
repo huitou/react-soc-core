@@ -8,7 +8,7 @@ import LogicComponent from './LogicComponent';
 
 let counter = 0;
 const changeEventHandle = () => {
-  console.log(counter++);
+  console.log(`Change event number ${++counter}`);
 };
 
 // eslint-disable-next-line
