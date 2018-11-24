@@ -5,14 +5,14 @@ export const withLInterface = (LInterface) => (WrappedComponent) => (props) => {
 
   class ExtendedComponent extends WrappedComponent {
     render() {
-      const { lInterface, level } = this.props;
+      const { lInterface } = this.props;
       // console.log('extended rende() at level ', level);
       lInterface.setChangeEventSwitchOff();
       return super.render && super.render();
     }
 
     componentDidMount() {
-      const { lInterface, level } = this.props;
+      const { lInterface } = this.props;
       // console.log('extended componentDidMount at level ', level);
       super.componentDidMount && super.componentDidMount();
       lInterface.hfuRegister({});
@@ -21,7 +21,7 @@ export const withLInterface = (LInterface) => (WrappedComponent) => (props) => {
     }
 
     componentDidUpdate() {
-      const { lInterface, level } = this.props;
+      const { lInterface } = this.props;
       // console.log('extended componentDidUpdate at level ', level);
       super.componentDidUpdate && super.componentDidUpdate();
       lInterface.setChangeEventSwitchOn();
@@ -29,7 +29,7 @@ export const withLInterface = (LInterface) => (WrappedComponent) => (props) => {
     }
 
     componentWillUnmount() {
-      const { lInterface, level } = this.props;
+      const { lInterface } = this.props;
       // console.log('extended componentWillUnmount at level ', level);
       lInterface.hfuUnregister();
       super.componentWillUnmount && super.componentWillUnmount();
