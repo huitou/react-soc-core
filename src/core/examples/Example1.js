@@ -8,7 +8,7 @@ import LogicComponent from './LogicComponent';
 
 let counter = 0;
 const changeEventHandle = () => {
-  console.log(counter++);
+  console.log(`Example1 - Change event number ${++counter}`);
 };
 
 // eslint-disable-next-line
@@ -27,7 +27,10 @@ const ldConfig = {
 const InterfacedLogicComponent = withLInterface(LInterface)(LogicComponent);
 
 const Example1 = (props) => (
-  <InterfacedLogicComponent ldConfig={ldConfig} level={props.level}/>
+  <div>
+    <div>Example 1 - Nested Interfaced Component - Parent-Child.</div>
+    <InterfacedLogicComponent ldConfig={ldConfig} level={props.level}/>
+  </div>
 );
 
 Example1.prototype = {

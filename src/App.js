@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 
 import Example1 from './core/examples/Example1';
+import Example2 from './core/examples/Example2';
+import Example3 from './core/examples/Example3';
 
 class App extends Component {
   render() {
@@ -14,6 +16,8 @@ class App extends Component {
         </header>
         <div className="App-intro">
           <Example1 level={1} />
+          <Example2 />
+          <Example3 />
         </div>
       </div>
     );
