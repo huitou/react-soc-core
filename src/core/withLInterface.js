@@ -1,42 +1,17 @@
 import React from 'react';
+import InterfaceAttacher from './InterfaceAttacher';
+
+/*
+  ATTENTION: This solution will not capture changes from leaf logic components.
+             A possible solution is to create a dummy component as leaf.
+*/
 
 export const withLInterface = (LInterface) => (WrappedComponent) => (props) => {
   const lInterface = new LInterface(props.ldConfig);
 
-  class ExtendedComponent extends WrappedComponent {
-    render() {
-      const { lInterface } = this.props;
-      // console.log('extended rende() at level ', level);
-      lInterface.setChangeEventSwitchOff();
-      return super.render && super.render();
-    }
-
-    componentDidMount() {
-      const { lInterface } = this.props;
-      // console.log('extended componentDidMount at level ', level);
-      super.componentDidMount && super.componentDidMount();
-      lInterface.hfuRegister({});
-      lInterface.setChangeEventSwitchOn();
-      lInterface.changeEveneHandle();
-    }
-
-    componentDidUpdate() {
-      const { lInterface } = this.props;
-      // console.log('extended componentDidUpdate at level ', level);
-      super.componentDidUpdate && super.componentDidUpdate();
-      lInterface.setChangeEventSwitchOn();
-      lInterface.changeEveneHandle();
-    }
-
-    componentWillUnmount() {
-      const { lInterface } = this.props;
-      // console.log('extended componentWillUnmount at level ', level);
-      lInterface.hfuUnregister();
-      super.componentWillUnmount && super.componentWillUnmount();
-    }
-  }
-
   return (
-    <ExtendedComponent {...props} ldConfig={undefined} lInterface={lInterface} />
+    <InterfaceAttacher {...props} ldConfig={undefined} lInterface={lInterface}>
+      <WrappedComponent {...props} ldConfig={undefined} lInterface={lInterface} />
+    </InterfaceAttacher>
   );
 }

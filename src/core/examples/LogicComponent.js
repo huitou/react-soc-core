@@ -29,8 +29,8 @@ class LogicComponent extends Component {
     const nestedLdConfig = { name: `Nested-${NAME}`, register: lInterface.childInterfaceRegister };
 
     return (
-      <div className={ level ? `test-level${level}` : 'test'} onClick={this.handleClick}>
-        <div>{`${NAME}-Level-${level}`}</div>
+      <div className={ level ? `test-level${level}` : 'test'}>
+        <div onClick={this.handleClick}>{`${NAME}-Level-${level}`}</div>
         { level ? <Nested ldConfig={nestedLdConfig} level={ level - 1 } /> : null }
       </div>)
     ;
