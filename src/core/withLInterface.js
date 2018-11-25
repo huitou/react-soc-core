@@ -1,19 +1,17 @@
 import React from 'react';
 
-export const withLInterface = (LInterface) => (WrappedComponent) => (props) => {
-  const lInterface = new LInterface(props.ldConfig);
-
+export const withLInterface = (LInterface) => (WrappedComponent) => {
   class ExtendedComponent extends WrappedComponent {
     render() {
       const { lInterface } = this.props;
-      // console.log('extended rende() at level ', level);
+      // console.log('extended rende() at level ', this.props.level);
       lInterface.setChangeEventSwitchOff();
       return super.render && super.render();
     }
 
     componentDidMount() {
       const { lInterface } = this.props;
-      // console.log('extended componentDidMount at level ', level);
+      // console.log('extended componentDidMount at level ', this.props.level);
       super.componentDidMount && super.componentDidMount();
       lInterface.hfuRegister({});
       lInterface.setChangeEventSwitchOn();
@@ -22,7 +20,7 @@ export const withLInterface = (LInterface) => (WrappedComponent) => (props) => {
 
     componentDidUpdate() {
       const { lInterface } = this.props;
-      // console.log('extended componentDidUpdate at level ', level);
+      // console.log('extended componentDidUpdate at level ', this.props.level);
       super.componentDidUpdate && super.componentDidUpdate();
       lInterface.setChangeEventSwitchOn();
       lInterface.changeEveneHandle();
@@ -30,13 +28,17 @@ export const withLInterface = (LInterface) => (WrappedComponent) => (props) => {
 
     componentWillUnmount() {
       const { lInterface } = this.props;
-      // console.log('extended componentWillUnmount at level ', level);
+      // console.log('extended componentWillUnmount at level ', this.props.level);
       lInterface.hfuUnregister();
       super.componentWillUnmount && super.componentWillUnmount();
     }
   }
 
-  return (
-    <ExtendedComponent {...props} ldConfig={undefined} lInterface={lInterface} />
-  );
+  return (props) => {
+    const lInterface = new LInterface(props.ldConfig);
+
+    return (
+      <ExtendedComponent {...props} ldConfig={undefined} lInterface={lInterface} />
+    );
+  }
 }
