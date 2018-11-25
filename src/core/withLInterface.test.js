@@ -29,7 +29,7 @@ class LogicComponent extends Component {
   state = { test: true };
 
   handleClick = () => {
-    console.log(`clicked at level ${this.props.level}`);
+    // console.log(`clicked at level ${this.props.level}`);
     this.setState(
       (state) => ({ test: !state.test })
     );

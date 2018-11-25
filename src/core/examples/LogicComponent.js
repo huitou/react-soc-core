@@ -6,6 +6,9 @@ import { withLInterface } from "../withLInterface";
 
 const NAME = 'LogicComponent';
 
+/*
+  ATTENTION: This is a nested component.
+*/
 class LogicComponent extends Component {
   static propTypes = {
     level: PropTypes.number,
