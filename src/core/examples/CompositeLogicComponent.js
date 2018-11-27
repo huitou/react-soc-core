@@ -15,7 +15,7 @@ const NAME = 'CompositeLogicComponent';
 
 class CompositeLogicComponent extends Component {
   static propTypes = {
-    lInterface: PropTypes.object.isRequired,
+    ldConfig: PropTypes.object.isRequired,
   };
 
   state = { test: true };
@@ -27,9 +27,8 @@ class CompositeLogicComponent extends Component {
   };
 
   render() {
-    const { lInterface } = this.props;
-    const ldConfig1 = { name: 'Child-1', register: lInterface.childInterfaceRegister };
-    const ldConfig2 = { name: 'Child-2', register: lInterface.childInterfaceRegister };
+    const ldConfig1 = { name: 'Child-1', register: this.lInterface.childInterfaceRegister };
+    const ldConfig2 = { name: 'Child-2', register: this.lInterface.childInterfaceRegister };
 
     // This choice makes every time a new LInterfacedSimpleLogicComponent2 class hence unmounting the previous.
     // const LInterfacedSimpleLogicComponent2 = LInterfaceWrapper(SimpleLogicComponent2);

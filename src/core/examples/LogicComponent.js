@@ -8,6 +8,7 @@ const NAME = 'LogicComponent';
 
 class LogicComponent extends Component {
   static propTypes = {
+    ldConfig: PropTypes.object.isRequired,
     level: PropTypes.number,
   };
   static defaultProps = {
@@ -23,10 +24,10 @@ class LogicComponent extends Component {
   };
 
   render() {
-    const { level, lInterface } = this.props;
+    const { level } = this.props;
     // console.log('orginal rende() at level ', level);
     const Nested = withLInterface(LInterface)(LogicComponent);
-    const nestedLdConfig = { name: `Nested-${NAME}`, register: lInterface.childInterfaceRegister };
+    const nestedLdConfig = { name: `Nested-${NAME}`, register: this.lInterface.childInterfaceRegister };
 
     return (
       <div>
