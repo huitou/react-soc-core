@@ -5,7 +5,7 @@ const NAME = 'SimpleLogicComponent2';
 
 class SimpleLogicComponent2 extends Component {
   static propTypes = {
-    lInterface: PropTypes.object.isRequired,
+    ldConfig: PropTypes.object.isRequired,
   };
 
   state = { test: true };

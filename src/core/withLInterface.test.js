@@ -35,10 +35,10 @@ class LogicComponent extends Component {
   };
 
   render() {
-    const { level, lInterface } = this.props;
+    const { level } = this.props;
     // console.log('orginal rende() at level ', level);
     const Nested = withLInterface(LInterface)(LogicComponent);
-    const nestedLdConfig = { name: `Nested-${NAME}`, register: lInterface.childInterfaceRegister };
+    const nestedLdConfig = { name: `Nested-${NAME}`, register: this.lInterface.childInterfaceRegister };
 
     return (
       <div className={ level ? `test-level${level}` : 'test'} onClick={this.handleClick}>
@@ -82,8 +82,8 @@ describe("withLInterface function", () => {
 
     it("render an extended component passing lInterface prop", () => {
       expect(enzymeWrapper_ExtendedComponent.length).toBe(LEVEL + 1);
-      expect(enzymeWrapper_ExtendedComponent.first().prop('lInterface')).toBeDefined();
-      expect(enzymeWrapper_ExtendedComponent.first().prop('ldConfig')).not.toBeDefined();
+      expect(enzymeWrapper_ExtendedComponent.first().prop('lInterface')).not.toBeDefined();
+      expect(enzymeWrapper_ExtendedComponent.first().prop('ldConfig')).toBeDefined();
     });
 
     it("parentRegister is called", () => {
