@@ -18,35 +18,53 @@ class LInterface {
 
   constructor({ name, register }) {
     this._name = name;
-    this._parentInterfaceRegister = register;
-    this._changeEventHandle = this._parentInterfaceRegister(this);
+    this._changeEventHandle = register(this);
     this._isChangeEventSwitchOn = true;
     this._childLInterfaces = [];
+
+    this.getName = this.getName.bind(this);
+    this.setChangeEventSwitchOn = this.setChangeEventSwitchOn.bind(this);
+    this.setChangeEventSwitchOff = this.setChangeEventSwitchOff.bind(this);
+    this.changeEveneHandle = this.changeEveneHandle.bind(this);
+
+    this.hfuRegister = this.hfuRegister.bind(this);
+    this.hfuUnregister = this.hfuUnregister.bind(this);
+    this.childInterfaceRegister = this.childInterfaceRegister.bind(this);
+    this.childInterfaceUnregister = this.childInterfaceUnregister.bind(this);
   }
 
-  setChangeEventSwitchOn = () => {
+  getName() {
+    return this._name;
+  };
+
+  setChangeEventSwitchOn() {
     this._isChangeEventSwitchOn = true;
   };
-  setChangeEventSwitchOff = () => {
+  setChangeEventSwitchOff() {
     this._isChangeEventSwitchOn = false;
   };
 
-  changeEveneHandle = () => {
+  changeEveneHandle() {
     if (this._isChangeEventSwitchOn) {
       this._changeEventHandle();
     }
   };
 
-  hfuRegister = ({ hefu, hifu }) => {
+  hfuRegister({ hefu, hifu }) {
     this.hfu = { hefu, hifu };
   };
-  hfuUnregister = () => {
+  hfuUnregister() {
     this.hfu = undefined;
   };
 
-  childInterfaceRegister = (childLInterface) => {
+  childInterfaceRegister(childLInterface) {
     this._childLInterfaces.push(childLInterface);
     return this.changeEveneHandle;
+  };
+
+  childInterfaceUnregister(childLInterface) {
+    // TODO
+    return childLInterface;
   };
 }
 
