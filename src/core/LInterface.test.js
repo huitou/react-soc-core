@@ -19,10 +19,6 @@ describe('LInterface', () => {
             expect(interfaceInstance._name).toBe(NAME);
         });
 
-        it('has _parentInterfaceRegister assuming the value register passed in the parameter', () => {
-            expect(interfaceInstance._parentInterfaceRegister).toBe(parentRegisterMock);
-        });
-
         it('has called register once to register itself', () => {
             expect(parentRegisterMock).toHaveBeenCalledTimes(1);
             expect(parentRegisterMock).toHaveBeenCalledWith(interfaceInstance);
