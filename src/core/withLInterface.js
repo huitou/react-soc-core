@@ -29,8 +29,10 @@ export const withLInterface = (LInterface) => (WrappedComponent) => {
     }
 
     componentWillUnmount() {
+      const { unregister } = this.props.ldConfig;
       // console.log('extended componentWillUnmount at level ', this.props.level);
       this.lInterface.hfuUnregister();
+      unregister && unregister(this.lInterface);
       super.componentWillUnmount && super.componentWillUnmount();
     }
   }
