@@ -27,8 +27,16 @@ class CompositeLogicComponent extends Component {
   };
 
   render() {
-    const ldConfig1 = { name: 'Child-1', register: this.lInterface.childInterfaceRegister };
-    const ldConfig2 = { name: 'Child-2', register: this.lInterface.childInterfaceRegister };
+    const ldConfig1 = {
+      name: 'Child-1',
+      register: this.lInterface.childInterfaceRegister,
+      unregister: this.lInterface.childInterfaceUnregister,
+    };
+    const ldConfig2 = {
+      name: 'Child-2',
+      register: this.lInterface.childInterfaceRegister,
+      unregister: this.lInterface.childInterfaceUnregister,
+    };
 
     // This choice makes every time a new LInterfacedSimpleLogicComponent2 class hence unmounting the previous.
     // const LInterfacedSimpleLogicComponent2 = LInterfaceWrapper(SimpleLogicComponent2);

@@ -20,7 +20,7 @@ class LInterface {
     this._name = name;
     this._changeEventHandle = register(this);
     this._isChangeEventSwitchOn = true;
-    this._childLInterfaces = [];
+    this._childLInterfaces = {};
 
     this.getName = this.getName.bind(this);
     this.setChangeEventSwitchOn = this.setChangeEventSwitchOn.bind(this);
@@ -29,8 +29,10 @@ class LInterface {
 
     this.hfuRegister = this.hfuRegister.bind(this);
     this.hfuUnregister = this.hfuUnregister.bind(this);
+
     this.childInterfaceRegister = this.childInterfaceRegister.bind(this);
     this.childInterfaceUnregister = this.childInterfaceUnregister.bind(this);
+    this.counter = 0;
   }
 
   getName() {
@@ -58,12 +60,23 @@ class LInterface {
   };
 
   childInterfaceRegister(childLInterface) {
-    this._childLInterfaces.push(childLInterface);
+    if (this._childLInterfaces[childLInterface.getName()]) {
+      if (this.counter === 0) {
+        this.counter++;
+        setTimeout(() => this.childInterfaceRegister(childLInterface), 0);
+      } else {
+        // eslint-disable-next-line
+        throw 'Name of child logic interface is NOT unique.';
+      }
+    } else {
+      this._childLInterfaces[childLInterface.getName()] = childLInterface;
+      this.counter = 0;
+    };
     return this.changeEveneHandle;
   };
 
   childInterfaceUnregister(childLInterface) {
-    // TODO
+    this._childLInterfaces[childLInterface.getName()] = undefined;
     return childLInterface;
   };
 }

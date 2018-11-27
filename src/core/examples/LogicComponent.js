@@ -27,7 +27,11 @@ class LogicComponent extends Component {
     const { level } = this.props;
     // console.log('orginal rende() at level ', level);
     const Nested = withLInterface(LInterface)(LogicComponent);
-    const nestedLdConfig = { name: `Nested-${NAME}`, register: this.lInterface.childInterfaceRegister };
+    const nestedLdConfig = {
+      name: `Nested-${NAME}`,
+      register: this.lInterface.childInterfaceRegister,
+      unregister: this.lInterface.childInterfaceUnregister,
+    };
 
     return (
       <div>

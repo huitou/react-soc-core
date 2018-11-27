@@ -4,6 +4,7 @@ export const withLInterface = (LInterface) => (WrappedComponent) => {
   class ExtendedComponent extends WrappedComponent {
     constructor(props) {
       super(props);
+      // console.log('extended constructor at level ', this.props.level);
       this.lInterface = new LInterface(props.ldConfig);
     }
 
