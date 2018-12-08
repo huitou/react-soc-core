@@ -26,9 +26,14 @@ class LogicComponent extends Component {
     level: 0,
   };
 
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   state = { test: true };
 
-  handleClick = () => {
+  handleClick() {
     this.setState(
       (state) => ({ test: !state.test })
     );

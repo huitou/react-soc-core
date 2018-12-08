@@ -1,6 +1,6 @@
 /*
   This is a generic LInterface class which may be
-  used directly for hoisting "free" hefu/hifu or
+  used directly for hoisting child interfaces or
   used as base class for concrete LInterfaces.
 
   ...
@@ -8,13 +8,17 @@
 */
 
 class LInterface {
-/*
-  An interface constructor expects a configuration object of the following shape:
-    {
-      register: (LInterface) => () => any
-      name: string
-    }
-*/ 
+  /*
+    Mandatory declaration, overridable.
+  */
+  static handleMap = {
+    hfu: { /* xxx: 'yyy' */ },
+  };
+
+  /*
+    Constructor expects a configuration object of the following shape:
+      { register: (LInterface) => () => any, name: string }
+  */
 
   constructor({ name, register }) {
     this._name = name;
@@ -52,8 +56,8 @@ class LInterface {
     }
   };
 
-  hfuRegister({ hefu, hifu }) {
-    this.hfu = { hefu, hifu };
+  hfuRegister(hfu) {
+    this.hfu = hfu;
   };
   hfuUnregister() {
     this.hfu = undefined;
