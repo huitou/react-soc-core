@@ -32,8 +32,8 @@ describe('LInterface', () => {
             expect(interfaceInstance._isChangeEventSwitchOn).toBe(true);
         });
 
-        it('has _childLInterfaces assuming the value []', () => {
-            expect(interfaceInstance._childLInterfaces).toEqual([]);
+        it('has _childLInterfaces assuming the value {}', () => {
+            expect(interfaceInstance._childLInterfaces).toEqual({});
         });
     });
 
