@@ -1,3 +1,11 @@
+/*
+  This is the Collector attacher which is used to
+  put a Collector instance into a logic component.
+
+  ...
+  Please add copyright here.
+*/
+
 import React from 'react';
 
 export const withLInterface = (LInterface) => (WrappedComponent) => {

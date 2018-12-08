@@ -1,7 +1,7 @@
 /*
-  This is a generic LInterface class which may be
+  This is a generic Collector class which may be
   used directly for hoisting child interfaces or
-  used as base class for concrete LInterfaces.
+  used as base class for concrete Collector classes.
 
   ...
   Please add copyright here.
