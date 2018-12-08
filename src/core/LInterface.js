@@ -83,6 +83,16 @@ class LInterface {
     this._childLInterfaces[childLInterface.getName()] = undefined;
     return childLInterface;
   };
+
+  // TODO
+  handleTree() {
+    return {};
+  }
+
+  // TODO
+  valueAndHandleTree() {
+    return { test: 'test' };
+  }
 }
 
 export default LInterface;
