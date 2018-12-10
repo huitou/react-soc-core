@@ -25,12 +25,16 @@ export const withLInterface = (LInterface) => (WrappedComponent) => {
     componentDidMount() {
       // console.log('extended componentDidMount at level ', this.props.level);
       super.componentDidMount && super.componentDidMount();
-      this.lInterface.hfuRegister(
-        Object.entries(LInterface.handleMap.hfu).reduce(
-          (acc, cur) => { acc[cur[0]] = this[cur[1]]; return acc },
-          {}
-        )
+      const hfu = { hifu: {}, hefu: {} };
+      Object.entries(LInterface.handleMap.hfu.hifu).reduce(
+        (acc, cur) => { acc[cur[0]] = this[cur[1]]; return acc },
+        hfu.hifu
       );
+      Object.entries(LInterface.handleMap.hfu.hefu).reduce(
+        (acc, cur) => { acc[cur[0]] = this[cur[1]]; return acc },
+        hfu.hefu
+      );
+      this.lInterface.hfuRegister(hfu);
       this.lInterface.setChangeEventSwitchOn();
       this.lInterface.changeEveneHandle();
     }

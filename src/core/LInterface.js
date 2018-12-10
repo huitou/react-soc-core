@@ -7,12 +7,31 @@
   Please add copyright here.
 */
 
+const getHandleNode = (inputNode) => {
+  const outputNode = {};
+  Object.entries(inputNode.hfu.hifu).reduce((acc, cur) => { acc[cur[0]] = cur[1]; return acc; }, outputNode);
+  Object.entries(inputNode.hfu.hefu).reduce((acc, cur) => { acc[cur[0]] = cur[1]; return acc; }, outputNode);
+  inputNode.children && Object.entries(inputNode.children).reduce((acc, cur) => { acc[cur[0]] = getHandleNode(cur[1]); return acc; }, outputNode);
+  return outputNode;
+}
+
+const getValueAndHandleNode = (inputNode) => {
+  const outputNode = {};
+  Object.entries(inputNode.hfu.hifu).reduce((acc, cur) => { acc[cur[0]] = cur[1](); return acc; }, outputNode);
+  Object.entries(inputNode.hfu.hefu).reduce((acc, cur) => { acc[cur[0]] = cur[1]; return acc; }, outputNode);
+  inputNode.children && Object.entries(inputNode.children).reduce((acc, cur) => { acc[cur[0]] = getValueAndHandleNode(cur[1]); return acc; }, outputNode);
+  return outputNode;
+}
+
 class LInterface {
   /*
     Mandatory declaration, overridable.
   */
   static handleMap = {
-    hfu: { /* xxx: 'yyy' */ },
+    hfu: {
+      hifu: { /* getXxx: 'getXxx' */ },
+      hefu: { setAaa: 'setBbb' },
+    },
   };
 
   /*
@@ -36,6 +55,10 @@ class LInterface {
 
     this.childInterfaceRegister = this.childInterfaceRegister.bind(this);
     this.childInterfaceUnregister = this.childInterfaceUnregister.bind(this);
+
+    this.handleTree = this.handleTree.bind(this);
+    this.valueAndHandleTree = this.valueAndHandleTree.bind(this);
+
     this.counter = 0;
   }
 
@@ -84,14 +107,12 @@ class LInterface {
     return childLInterface;
   };
 
-  // TODO
   handleTree() {
-    return {};
+    return getHandleNode(this);
   }
 
-  // TODO
   valueAndHandleTree() {
-    return { test: 'test' };
+    return getValueAndHandleNode(this);
   }
 }
 
