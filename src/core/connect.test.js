@@ -7,7 +7,8 @@ import { connect } from './connect';
 
 class VisualComponent extends Component {
     static propTypes = {
-        test: PropTypes.string.isRequired,
+        hifu: PropTypes.object.isRequired,
+        hefu: PropTypes.object.isRequired,
     };
 
     constructor(props) {
@@ -26,7 +27,7 @@ class VisualComponent extends Component {
     render() {
         return (
             <div className='test' onClick={this.handleClick}>
-                {this.props.test}
+                Test
             </div>
         );
     }
@@ -63,6 +64,7 @@ describe("connect function", () => {
         it("render the logic component and a Wrapper component with the wrapped visual component", () => {
             expect(enzymeWrapper_WrapperComponent.length).toBe(1);
             expect(enzymeWrapper.find('.test').length).toBe(1);
+            expect(enzymeWrapper.find('VisualComponent').props()).toEqual({ hefu: {}, hifu: {} });
             expect(enzymeWrapper.find('.simpleLogicComponent1').length).toBe(1);
         });
     });

@@ -8,18 +8,30 @@
 */
 
 const getHandleNode = (inputNode) => {
-  const outputNode = {};
-  Object.entries(inputNode.hfu.hifu).reduce((acc, cur) => { acc[cur[0]] = cur[1]; return acc; }, outputNode);
-  Object.entries(inputNode.hfu.hefu).reduce((acc, cur) => { acc[cur[0]] = cur[1]; return acc; }, outputNode);
-  inputNode.children && Object.entries(inputNode.children).reduce((acc, cur) => { acc[cur[0]] = getHandleNode(cur[1]); return acc; }, outputNode);
+  const outputNode = { hifu: {}, hefu: {} };
+  inputNode.hfu && inputNode.hfu.hifu && Object
+    .entries(inputNode.hfu.hifu)
+    .reduce((acc, cur) => { acc[cur[0]] = cur[1]; return acc; }, outputNode.hifu);
+  inputNode.hfu && inputNode.hfu.hefu && Object
+    .entries(inputNode.hfu.hefu)
+    .reduce((acc, cur) => { acc[cur[0]] = cur[1]; return acc; }, outputNode.hefu);
+  inputNode.children && Object
+    .entries(inputNode.children)
+    .reduce((acc, cur) => { acc[cur[0]] = getHandleNode(cur[1]); return acc; }, outputNode);
   return outputNode;
 }
 
 const getValueAndHandleNode = (inputNode) => {
-  const outputNode = {};
-  Object.entries(inputNode.hfu.hifu).reduce((acc, cur) => { acc[cur[0]] = cur[1](); return acc; }, outputNode);
-  Object.entries(inputNode.hfu.hefu).reduce((acc, cur) => { acc[cur[0]] = cur[1]; return acc; }, outputNode);
-  inputNode.children && Object.entries(inputNode.children).reduce((acc, cur) => { acc[cur[0]] = getValueAndHandleNode(cur[1]); return acc; }, outputNode);
+  const outputNode = { hifu: {}, hefu: {} };
+  inputNode.hfu && inputNode.hfu.hifu && Object
+    .entries(inputNode.hfu.hifu)
+    .reduce((acc, cur) => { acc[cur[0]] = cur[1](); return acc; }, outputNode.hifu);
+  inputNode.hfu && inputNode.hfu.hefu && Object
+    .entries(inputNode.hfu.hefu)
+    .reduce((acc, cur) => { acc[cur[0]] = cur[1]; return acc; }, outputNode.hefu);
+  inputNode.children && Object
+    .entries(inputNode.children)
+    .reduce((acc, cur) => { acc[cur[0]] = getValueAndHandleNode(cur[1]); return acc; }, outputNode);
   return outputNode;
 }
 
@@ -29,8 +41,8 @@ class LInterface {
   */
   static handleMap = {
     hfu: {
-      hifu: { /* getXxx: 'getXxx' */ },
-      hefu: { setAaa: 'setBbb' },
+      hifu: { /* getXxx: 'getXxx', xxx: 'getXxx' */ },
+      hefu: { /* setAaa: 'setBbb' */ },
     },
   };
 
