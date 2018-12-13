@@ -1,3 +1,10 @@
+/*
+  Testing for Collector Attacher.
+
+  Copyright (c) 2018 Riverside Software Engineering Ltd. All rights reserved.
+  Licensed under the MIT License. See LICENSE file in the project root for full license information.
+*/
+
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { shallow, mount } from "enzyme";
