@@ -1,11 +1,19 @@
+/*
+  This is the Collector attacher which is used to
+  put a Collector instance into a logic component.
+
+  ...
+  Please add copyright here.
+*/
+
 import React from 'react';
 
-export const withLInterface = (LInterface) => (WrappedComponent) => {
+export const withLInterface = (LogicInterface) => (WrappedComponent) => {
   class ExtendedComponent extends WrappedComponent {
     constructor(props) {
       super(props);
       // console.log('extended constructor at level ', this.props.level);
-      this.lInterface = new LInterface(props.ldConfig);
+      this.lInterface = new LogicInterface(props.ldConfig);
     }
 
     render() {
@@ -17,12 +25,24 @@ export const withLInterface = (LInterface) => (WrappedComponent) => {
     componentDidMount() {
       // console.log('extended componentDidMount at level ', this.props.level);
       super.componentDidMount && super.componentDidMount();
-      this.lInterface.hfuRegister(
-        Object.entries(LInterface.handleMap.hfu).reduce(
-          (acc, cur) => { acc[cur[0]] = this[cur[1]]; return acc },
-          {}
-        )
-      );
+
+      if (LogicInterface.handleMap && LogicInterface.handleMap.hfu) {
+        const hfu = { hifu: {}, hefu: {} };
+
+        LogicInterface.handleMap.hfu.hifu &&
+          Object.entries(LogicInterface.handleMap.hfu.hifu).reduce(
+            (acc, cur) => { acc[cur[0]] = this[cur[1]]; return acc },
+            hfu.hifu
+          );
+        LogicInterface.handleMap.hfu.hefu &&
+          Object.entries(LogicInterface.handleMap.hfu.hefu).reduce(
+            (acc, cur) => { acc[cur[0]] = this[cur[1]]; return acc },
+            hfu.hefu
+          );
+
+        this.lInterface.hfuRegister(hfu);
+      }
+
       this.lInterface.setChangeEventSwitchOn();
       this.lInterface.changeEveneHandle();
     }

@@ -1,18 +1,49 @@
 /*
-  This is a generic LInterface class which may be
+  This is a generic Collector class which may be
   used directly for hoisting child interfaces or
-  used as base class for concrete LInterfaces.
+  used as base class for concrete Collector classes.
 
   ...
   Please add copyright here.
 */
+
+const getHandleNode = (inputNode) => {
+  const outputNode = { hifu: {}, hefu: {} };
+  inputNode.hfu && inputNode.hfu.hifu && Object
+    .entries(inputNode.hfu.hifu)
+    .reduce((acc, cur) => { acc[cur[0]] = cur[1]; return acc; }, outputNode.hifu);
+  inputNode.hfu && inputNode.hfu.hefu && Object
+    .entries(inputNode.hfu.hefu)
+    .reduce((acc, cur) => { acc[cur[0]] = cur[1]; return acc; }, outputNode.hefu);
+  inputNode.children && Object
+    .entries(inputNode.children)
+    .reduce((acc, cur) => { acc[cur[0]] = getHandleNode(cur[1]); return acc; }, outputNode);
+  return outputNode;
+}
+
+const getValueAndHandleNode = (inputNode) => {
+  const outputNode = { hifu: {}, hefu: {} };
+  inputNode.hfu && inputNode.hfu.hifu && Object
+    .entries(inputNode.hfu.hifu)
+    .reduce((acc, cur) => { acc[cur[0]] = cur[1](); return acc; }, outputNode.hifu);
+  inputNode.hfu && inputNode.hfu.hefu && Object
+    .entries(inputNode.hfu.hefu)
+    .reduce((acc, cur) => { acc[cur[0]] = cur[1]; return acc; }, outputNode.hefu);
+  inputNode.children && Object
+    .entries(inputNode.children)
+    .reduce((acc, cur) => { acc[cur[0]] = getValueAndHandleNode(cur[1]); return acc; }, outputNode);
+  return outputNode;
+}
 
 class LInterface {
   /*
     Mandatory declaration, overridable.
   */
   static handleMap = {
-    hfu: { /* xxx: 'yyy' */ },
+    hfu: {
+      hifu: { /* getXxx: 'getXxx', xxx: 'getXxx' */ },
+      hefu: { /* setAaa: 'setBbb' */ },
+    },
   };
 
   /*
@@ -36,6 +67,10 @@ class LInterface {
 
     this.childInterfaceRegister = this.childInterfaceRegister.bind(this);
     this.childInterfaceUnregister = this.childInterfaceUnregister.bind(this);
+
+    this.handleTree = this.handleTree.bind(this);
+    this.valueAndHandleTree = this.valueAndHandleTree.bind(this);
+
     this.counter = 0;
   }
 
@@ -83,6 +118,14 @@ class LInterface {
     this._childLInterfaces[childLInterface.getName()] = undefined;
     return childLInterface;
   };
+
+  handleTree() {
+    return getHandleNode(this);
+  }
+
+  valueAndHandleTree() {
+    return getValueAndHandleNode(this);
+  }
 }
 
 export default LInterface;
