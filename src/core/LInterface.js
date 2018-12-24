@@ -3,8 +3,8 @@
   used directly for hoisting child interfaces or
   used as base class for concrete Collector classes.
 
-  ...
-  Please add copyright here.
+  Copyright (c) 2018 Riverside Software Engineering Ltd. All rights reserved.
+  Licensed under the MIT License. See LICENSE file in the project root for full license information.
 */
 
 const getHandleNode = (inputNode) => {
