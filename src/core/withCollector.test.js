@@ -91,7 +91,7 @@ describe("withCollector function", () => {
       jest.clearAllMocks();
     });
 
-    it("render an extended component with the wrapped logic component content", () => {
+    it("render an extended component with the wrapped model component content", () => {
       expect(enzymeWrapper_ExtendedComponent.length).toBe(LEVEL + 1);
       expect(enzymeWrapper.find('.test').length).toBe(1);
     });
@@ -110,7 +110,7 @@ describe("withCollector function", () => {
       expect(rootCollector._changeEventHandle).toBeDefined();
     });
 
-    it("the wrapped logic component's hfu is registered in collector", () => {
+    it("the wrapped model component's hfu is registered in collector", () => {
       expect(rootCollector.hfu).toBeDefined();
     });
 
