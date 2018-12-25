@@ -29,8 +29,8 @@ class LogicComponent extends Component {
     const Nested = withCollector(Collector)(LogicComponent);
     const nestedLdConfig = {
       name: `Nested-${NAME}`,
-      register: this.lInterface.childInterfaceRegister,
-      unregister: this.lInterface.childInterfaceUnregister,
+      register: this.collector.childCollectorRegister,
+      unregister: this.collector.childCollectorUnregister,
     };
 
     return (

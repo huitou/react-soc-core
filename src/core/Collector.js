@@ -55,7 +55,7 @@ class Collector {
     this._name = name;
     this._changeEventHandle = register(this);
     this._isChangeEventSwitchOn = true;
-    this._childLInterfaces = {};
+    this._childCollectors = {};
 
     this.getName = this.getName.bind(this);
     this.setChangeEventSwitchOn = this.setChangeEventSwitchOn.bind(this);
@@ -65,8 +65,8 @@ class Collector {
     this.hfuRegister = this.hfuRegister.bind(this);
     this.hfuUnregister = this.hfuUnregister.bind(this);
 
-    this.childInterfaceRegister = this.childInterfaceRegister.bind(this);
-    this.childInterfaceUnregister = this.childInterfaceUnregister.bind(this);
+    this.childCollectorRegister = this.childCollectorRegister.bind(this);
+    this.childCollectorUnregister = this.childCollectorUnregister.bind(this);
 
     this.handleTree = this.handleTree.bind(this);
     this.valueAndHandleTree = this.valueAndHandleTree.bind(this);
@@ -98,24 +98,24 @@ class Collector {
     this.hfu = undefined;
   };
 
-  childInterfaceRegister(childLInterface) {
-    if (this._childLInterfaces[childLInterface.getName()]) {
+  childCollectorRegister(childLInterface) {
+    if (this._childCollectors[childLInterface.getName()]) {
       if (this.counter === 0) {
         this.counter++;
-        setTimeout(() => this.childInterfaceRegister(childLInterface), 0);
+        setTimeout(() => this.childCollectorRegister(childLInterface), 0);
       } else {
         // eslint-disable-next-line
         throw 'Name of child collector is NOT unique.';
       }
     } else {
-      this._childLInterfaces[childLInterface.getName()] = childLInterface;
+      this._childCollectors[childLInterface.getName()] = childLInterface;
       this.counter = 0;
     };
     return this.changeEveneHandle;
   };
 
-  childInterfaceUnregister(childLInterface) {
-    this._childLInterfaces[childLInterface.getName()] = undefined;
+  childCollectorUnregister(childLInterface) {
+    this._childCollectors[childLInterface.getName()] = undefined;
     return childLInterface;
   };
 

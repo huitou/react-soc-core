@@ -39,8 +39,8 @@ describe('Collector', () => {
             expect(collectorInstance._isChangeEventSwitchOn).toBe(true);
         });
 
-        it('has _childLInterfaces assuming the value {}', () => {
-            expect(collectorInstance._childLInterfaces).toEqual({});
+        it('has _childCollectors assuming the value {}', () => {
+            expect(collectorInstance._childCollectors).toEqual({});
         });
     });
 

@@ -29,13 +29,13 @@ class CompositeLogicComponent extends Component {
   render() {
     const ldConfig1 = {
       name: 'Child-1',
-      register: this.lInterface.childInterfaceRegister,
-      unregister: this.lInterface.childInterfaceUnregister,
+      register: this.collector.childCollectorRegister,
+      unregister: this.collector.childCollectorUnregister,
     };
     const ldConfig2 = {
       name: 'Child-2',
-      register: this.lInterface.childInterfaceRegister,
-      unregister: this.lInterface.childInterfaceUnregister,
+      register: this.collector.childCollectorRegister,
+      unregister: this.collector.childCollectorUnregister,
     };
 
     // This choice makes every time a new CollectedSimpleLogicComponent2 class hence unmounting the previous.

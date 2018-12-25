@@ -13,12 +13,12 @@ export const withCollector = (Collector) => (WrappedComponent) => {
     constructor(props) {
       super(props);
       // console.log('extended constructor at level ', this.props.level);
-      this.lInterface = new Collector(props.ldConfig);
+      this.collector = new Collector(props.ldConfig);
     }
 
     render() {
       // console.log('extended rende() at level ', this.props.level);
-      this.lInterface.setChangeEventSwitchOff();
+      this.collector.setChangeEventSwitchOff();
       return super.render && super.render();
     }
 
@@ -40,25 +40,25 @@ export const withCollector = (Collector) => (WrappedComponent) => {
             hfu.hefu
           );
 
-        this.lInterface.hfuRegister(hfu);
+        this.collector.hfuRegister(hfu);
       }
 
-      this.lInterface.setChangeEventSwitchOn();
-      this.lInterface.changeEveneHandle();
+      this.collector.setChangeEventSwitchOn();
+      this.collector.changeEveneHandle();
     }
 
     componentDidUpdate() {
       // console.log('extended componentDidUpdate at level ', this.props.level);
       super.componentDidUpdate && super.componentDidUpdate();
-      this.lInterface.setChangeEventSwitchOn();
-      this.lInterface.changeEveneHandle();
+      this.collector.setChangeEventSwitchOn();
+      this.collector.changeEveneHandle();
     }
 
     componentWillUnmount() {
       const { unregister } = this.props.ldConfig;
       // console.log('extended componentWillUnmount at level ', this.props.level);
-      this.lInterface.hfuUnregister();
-      unregister && unregister(this.lInterface);
+      this.collector.hfuUnregister();
+      unregister && unregister(this.collector);
       super.componentWillUnmount && super.componentWillUnmount();
     }
   }

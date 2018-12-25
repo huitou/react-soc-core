@@ -52,8 +52,8 @@ class LogicComponent extends Component {
     const Nested = withCollector(Collector)(LogicComponent);
     const nestedLdConfig = {
       name: `Nested-${NAME}`,
-      register: this.lInterface.childInterfaceRegister,
-      unregister: this.lInterface.childInterfaceUnregister,
+      register: this.collector.childCollectorRegister,
+      unregister: this.collector.childCollectorUnregister,
     };
 
     return (
@@ -96,9 +96,9 @@ describe("withCollector function", () => {
       expect(enzymeWrapper.find('.test').length).toBe(1);
     });
 
-    it("render an extended component passing lInterface prop", () => {
+    it("render an extended component passing collector prop", () => {
       expect(enzymeWrapper_ExtendedComponent.length).toBe(LEVEL + 1);
-      expect(enzymeWrapper_ExtendedComponent.first().prop('lInterface')).not.toBeDefined();
+      expect(enzymeWrapper_ExtendedComponent.first().prop('collector')).not.toBeDefined();
       expect(enzymeWrapper_ExtendedComponent.first().prop('ldConfig')).toBeDefined();
     });
 
@@ -106,11 +106,11 @@ describe("withCollector function", () => {
       expect(parentRegisterMock).toHaveBeenCalled();
     });
 
-    it("the lInterface's _changeEventHandle is registered", () => {
+    it("the collector's _changeEventHandle is registered", () => {
       expect(rootCollector._changeEventHandle).toBeDefined();
     });
 
-    it("the wrapped logic component's hfu is registered in lInterface", () => {
+    it("the wrapped logic component's hfu is registered in collector", () => {
       expect(rootCollector.hfu).toBeDefined();
     });
 
@@ -126,7 +126,7 @@ describe("withCollector function", () => {
   });
 
   describe("when the function component is unmounted", () => {
-    it("lInterface's hfu is unregistered", () => {
+    it("collector's hfu is unregistered", () => {
       rootCollector = undefined;
       const FunctionComponent = withCollector(Collector)(LogicComponent);
       const enzymeWrapper = mount(<FunctionComponent ldConfig={rootLdConfig} level={LEVEL} />);
