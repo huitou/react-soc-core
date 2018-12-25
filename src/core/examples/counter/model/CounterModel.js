@@ -11,4 +11,4 @@ import { withCollector } from '../../../withCollector';
 import CounterCollector from './CounterCollector';
 import CounterLogic from './CounterLogic';
 
-export const CounterModel = withCollector(CounterCollector)(CounterLogic);
+export default withCollector(CounterCollector)(CounterLogic);

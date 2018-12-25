@@ -7,6 +7,6 @@
   See LICENSE file in the project root for full license information.
 */
 
-import { CounterModel } from './Counter';
+import CounterModel from './CounterModel';
 
 export default CounterModel;

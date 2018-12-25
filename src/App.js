@@ -6,7 +6,7 @@ import './App.css';
 // import Example2 from './core/examples/Example2';
 // import Example3 from './core/examples/Example3';
 
-import Counter from './core/examples/counter';
+import Counter, { DoubleViewCounter } from './core/examples/counter';
 
 class App extends Component {
   render() {
@@ -23,6 +23,7 @@ class App extends Component {
             <Example3 />
           */ }
           <Counter />
+          <DoubleViewCounter />
         </div>
       </div>
     );

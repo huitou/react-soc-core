@@ -9,8 +9,10 @@
 
 import { connect } from '../../connect';
 import CounterModel from './model';
-import CounterView from './view';
+import CounterView, { CounterDoubleView } from './view';
 
 const Counter = connect(CounterModel, 'Counter')(CounterView);
+const DoubleViewCounter = connect(CounterModel, 'Counter')(CounterDoubleView);
 
 export default Counter;
+export { DoubleViewCounter };

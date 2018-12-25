@@ -7,6 +7,8 @@
   See LICENSE file in the project root for full license information.
 */
 
-import CounterView from './Counter';
+import CounterView from './CounterView';
+import CounterDoubleView from './CounterDoubleView';
 
 export default CounterView;
+export { CounterDoubleView };
