@@ -9,7 +9,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { shallow, mount } from "enzyme";
 
-import { LInterfacedSimpleLogicComponent3 } from './examples/LInterfacedLogicComponents';
+import { CollectedSimpleLogicComponent3 } from './examples/CollectedLogicComponents';
 import { connect } from './connect';
 
 class VisualComponent extends Component {
@@ -46,14 +46,14 @@ const NAME = 'Test';
 describe("connect function", () => {
     describe("when called with a LModel class and a name parameters", () => {
         it("returns a wrapper function", () => {
-            const wrapperFunction = connect(LInterfacedSimpleLogicComponent3, NAME);
+            const wrapperFunction = connect(CollectedSimpleLogicComponent3, NAME);
             expect(typeof wrapperFunction).toBe('function');
         });
     });
 
     describe("when the returned wrapper function is called", () => {
         it("returns a function component", () => {
-            const FunctionComponent = connect(LInterfacedSimpleLogicComponent3, NAME)(VisualComponent);
+            const FunctionComponent = connect(CollectedSimpleLogicComponent3, NAME)(VisualComponent);
             expect(typeof FunctionComponent).toBe('function');
         });
     });
@@ -61,7 +61,7 @@ describe("connect function", () => {
     describe("when the function component is mounted with proper props", () => {
         let FunctionComponent, enzymeWrapper;
         beforeEach(() => {
-            FunctionComponent = connect(LInterfacedSimpleLogicComponent3, NAME)(VisualComponent);
+            FunctionComponent = connect(CollectedSimpleLogicComponent3, NAME)(VisualComponent);
             enzymeWrapper = mount(<FunctionComponent />);
         });
         afterEach(() => {

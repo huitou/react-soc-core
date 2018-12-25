@@ -1,6 +1,6 @@
 /*
   This is a generic Collector class which may be
-  used directly for hoisting child interfaces or
+  used directly for hoisting child handles or
   used as base class for concrete Collector classes.
 
   Copyright (c) 2018 Riverside Software Engineering Ltd. All rights reserved.
@@ -105,7 +105,7 @@ class Collector {
         setTimeout(() => this.childInterfaceRegister(childLInterface), 0);
       } else {
         // eslint-disable-next-line
-        throw 'Name of child logic interface is NOT unique.';
+        throw 'Name of child collector is NOT unique.';
       }
     } else {
       this._childLInterfaces[childLInterface.getName()] = childLInterface;

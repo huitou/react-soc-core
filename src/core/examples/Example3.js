@@ -1,20 +1,20 @@
 import React from "react";
-import { LInterfacedCompositeLogicComponent } from './LInterfacedLogicComponents';
+import { CollectedCompositeLogicComponent } from './CollectedLogicComponents';
 
 let counter = 0;
 const changeEventHandle = () => {
   // console.log(`Example3 - Change event number ${++counter}`);
-  // console.log('rootlInterface:', rootlInterface);
+  // console.log('rootCollector:', rootCollector);
 };
 
 // eslint-disable-next-line
-let rootlInterface = [];
-const register = (interfaceInstance) => {
-  rootlInterface.push(interfaceInstance);
+let rootCollector = [];
+const register = (collectorInstance) => {
+  rootCollector.push(collectorInstance);
   return changeEventHandle;
 };
 
-const name = 'RootInterface';
+const name = 'RootCollector';
 const ldConfig = {
   name,
   register,
@@ -22,8 +22,8 @@ const ldConfig = {
 
 const Example3 = (props) => (
   <div>
-    <div>Example 3 - Interfaced composite logic component Parent-Child.</div>
-    <LInterfacedCompositeLogicComponent ldConfig={ldConfig} />
+    <div>Example 3 - Collected composite logic component Parent-Child.</div>
+    <CollectedCompositeLogicComponent ldConfig={ldConfig} />
   </div>
 );
 

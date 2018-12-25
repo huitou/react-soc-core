@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 
 export const connect = (LModel, name) => (WrappedComponent) => {
     const root = {
-        lInterface: undefined,
+        collector: undefined,
         ref: React.createRef(),
     };
 
@@ -20,8 +20,8 @@ export const connect = (LModel, name) => (WrappedComponent) => {
         root.ref.current && root.ref.current.forceUpdate();
     };
 
-    const register = (interfaceInstance) => {
-        root.lInterface = interfaceInstance;
+    const register = (collectorInstance) => {
+        root.collector = collectorInstance;
         return changeEventHandle;
     };
 
@@ -29,8 +29,8 @@ export const connect = (LModel, name) => (WrappedComponent) => {
 
     class Wrapper extends React.Component {
         render() {
-            return root.lInterface
-                ? <WrappedComponent {...this.props} {...root.lInterface.valueAndHandleTree()} />
+            return root.collector
+                ? <WrappedComponent {...this.props} {...root.collector.valueAndHandleTree()} />
                 : null;
         }
     }
