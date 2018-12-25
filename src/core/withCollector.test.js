@@ -9,14 +9,14 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { shallow, mount } from "enzyme";
 
-import LInterface from "./LInterface";
-import { withLInterface } from "./withLInterface";
+import Collector from "./Collector";
+import { withCollector } from "./withCollector";
 
-let rootlInterface;
-const NAME = 'TestInterface';
+let rootCollector;
+const NAME = 'TestCollector';
 const parentChangeEventHandleMock = jest.fn();
-const parentRegisterMock = jest.fn((interfaceInstance) => {
-  rootlInterface = interfaceInstance;
+const parentRegisterMock = jest.fn((collectorInstance) => {
+  rootCollector = collectorInstance;
   return parentChangeEventHandleMock;
 });
 const rootLdConfig = {
@@ -49,11 +49,11 @@ class LogicComponent extends Component {
   render() {
     const { level } = this.props;
     // console.log('orginal rende() at level ', level);
-    const Nested = withLInterface(LInterface)(LogicComponent);
+    const Nested = withCollector(Collector)(LogicComponent);
     const nestedLdConfig = {
       name: `Nested-${NAME}`,
-      register: this.lInterface.childInterfaceRegister,
-      unregister: this.lInterface.childInterfaceUnregister,
+      register: this.collector.childCollectorRegister,
+      unregister: this.collector.childCollectorUnregister,
     };
 
     return (
@@ -64,17 +64,17 @@ class LogicComponent extends Component {
   }
 }
 
-describe("withLInterface function", () => {
-  describe("when called with a LInterface class parameter", () => {
+describe("withCollector function", () => {
+  describe("when called with a Collector class parameter", () => {
     it("returns a wrapper function", () => {
-      const wrapperFunction = withLInterface(LInterface);
+      const wrapperFunction = withCollector(Collector);
       expect(typeof wrapperFunction).toBe('function');
     });
   });
 
   describe("when the returned wrapper function is called", () => {
     it("returns a function component", () => {
-      const FunctionComponent = withLInterface(LInterface)(LogicComponent);
+      const FunctionComponent = withCollector(Collector)(LogicComponent);
       expect(typeof FunctionComponent).toBe('function');
     });
   });
@@ -82,8 +82,8 @@ describe("withLInterface function", () => {
   describe("when the function component is mounted with proper props", () => {
     let FunctionComponent, enzymeWrapper, enzymeWrapper_ExtendedComponent;
     beforeEach(() => {
-      rootlInterface = undefined;
-      FunctionComponent = withLInterface(LInterface)(LogicComponent);
+      rootCollector = undefined;
+      FunctionComponent = withCollector(Collector)(LogicComponent);
       enzymeWrapper = mount(<FunctionComponent ldConfig={rootLdConfig} level={LEVEL} />);
       enzymeWrapper_ExtendedComponent = enzymeWrapper.find('ExtendedComponent');
     });
@@ -91,14 +91,14 @@ describe("withLInterface function", () => {
       jest.clearAllMocks();
     });
 
-    it("render an extended component with the wrapped logic component content", () => {
+    it("render an extended component with the wrapped model component content", () => {
       expect(enzymeWrapper_ExtendedComponent.length).toBe(LEVEL + 1);
       expect(enzymeWrapper.find('.test').length).toBe(1);
     });
 
-    it("render an extended component passing lInterface prop", () => {
+    it("render an extended component passing collector prop", () => {
       expect(enzymeWrapper_ExtendedComponent.length).toBe(LEVEL + 1);
-      expect(enzymeWrapper_ExtendedComponent.first().prop('lInterface')).not.toBeDefined();
+      expect(enzymeWrapper_ExtendedComponent.first().prop('collector')).not.toBeDefined();
       expect(enzymeWrapper_ExtendedComponent.first().prop('ldConfig')).toBeDefined();
     });
 
@@ -106,12 +106,12 @@ describe("withLInterface function", () => {
       expect(parentRegisterMock).toHaveBeenCalled();
     });
 
-    it("the lInterface's _changeEventHandle is registered", () => {
-      expect(rootlInterface._changeEventHandle).toBeDefined();
+    it("the collector's _changeEventHandle is registered", () => {
+      expect(rootCollector._changeEventHandle).toBeDefined();
     });
 
-    it("the wrapped logic component's hfu is registered in lInterface", () => {
-      expect(rootlInterface.hfu).toBeDefined();
+    it("the wrapped model component's hfu is registered in collector", () => {
+      expect(rootCollector.hfu).toBeDefined();
     });
 
     it("the parent's change event handle has benn called once", () => {
@@ -126,13 +126,13 @@ describe("withLInterface function", () => {
   });
 
   describe("when the function component is unmounted", () => {
-    it("lInterface's hfu is unregistered", () => {
-      rootlInterface = undefined;
-      const FunctionComponent = withLInterface(LInterface)(LogicComponent);
+    it("collector's hfu is unregistered", () => {
+      rootCollector = undefined;
+      const FunctionComponent = withCollector(Collector)(LogicComponent);
       const enzymeWrapper = mount(<FunctionComponent ldConfig={rootLdConfig} level={LEVEL} />);
       enzymeWrapper.unmount();
 
-      expect(rootlInterface.hfu).not.toBeDefined();
+      expect(rootCollector.hfu).not.toBeDefined();
     });
   });
 });

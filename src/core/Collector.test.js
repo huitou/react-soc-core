@@ -5,42 +5,42 @@
   Licensed under the MIT License. See LICENSE file in the project root for full license information.
 */
 
-import LInterface from './LInterface';
+import Collector from './Collector';
 
-const NAME = 'TestInterface';
+const NAME = 'TestCollector';
 const parentChangeEventHandleMock = jest.fn();
 const parentRegisterMock = jest.fn().mockReturnValue(parentChangeEventHandleMock);
 
-describe('LInterface', () => {
+describe('Collector', () => {
     describe('instance, when properly instantiated with an object parameter,', () => {
         
-        let interfaceInstance
+        let collectorInstance
         beforeEach(() => {
-            interfaceInstance = new LInterface({ name: NAME, register: parentRegisterMock });
+            collectorInstance = new Collector({ name: NAME, register: parentRegisterMock });
         })
         afterEach(() => {
             jest.clearAllMocks();
         });
 
         it('has _name assuming the value name passed in the parameter', () => {
-            expect(interfaceInstance._name).toBe(NAME);
+            expect(collectorInstance._name).toBe(NAME);
         });
 
         it('has called register once to register itself', () => {
             expect(parentRegisterMock).toHaveBeenCalledTimes(1);
-            expect(parentRegisterMock).toHaveBeenCalledWith(interfaceInstance);
+            expect(parentRegisterMock).toHaveBeenCalledWith(collectorInstance);
         });
 
         it('has _changeEventHandle assuming the value returned by register', () => {
-            expect(interfaceInstance._changeEventHandle).toBe(parentChangeEventHandleMock);
+            expect(collectorInstance._changeEventHandle).toBe(parentChangeEventHandleMock);
         });
 
         it('has _isChangeEventSwitchOn assuming the value true', () => {
-            expect(interfaceInstance._isChangeEventSwitchOn).toBe(true);
+            expect(collectorInstance._isChangeEventSwitchOn).toBe(true);
         });
 
-        it('has _childLInterfaces assuming the value {}', () => {
-            expect(interfaceInstance._childLInterfaces).toEqual({});
+        it('has _childCollectors assuming the value {}', () => {
+            expect(collectorInstance._childCollectors).toEqual({});
         });
     });
 

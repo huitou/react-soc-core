@@ -6,8 +6,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Development flow
 
-In this preliminary period of development, domain main branch is used instead of master branch.
-
-For logic domain the main development branch is ld/main and all logic domain feature development is against this branch.
-
-Eventual common aspects for more than one domain main branches will be cherry-picked into master branch for sharing.
+After a period of preliminary development, now it is in consolidation and master is used as base branch directly.

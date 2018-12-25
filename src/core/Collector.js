@@ -1,6 +1,6 @@
 /*
   This is a generic Collector class which may be
-  used directly for hoisting child interfaces or
+  used directly for hoisting child handles or
   used as base class for concrete Collector classes.
 
   Copyright (c) 2018 Riverside Software Engineering Ltd. All rights reserved.
@@ -35,7 +35,7 @@ const getValueAndHandleNode = (inputNode) => {
   return outputNode;
 }
 
-class LInterface {
+class Collector {
   /*
     Mandatory declaration, overridable.
   */
@@ -48,14 +48,14 @@ class LInterface {
 
   /*
     Constructor expects a configuration object of the following shape:
-      { register: (LInterface) => () => any, name: string }
+      { register: (Collector) => () => any, name: string }
   */
 
   constructor({ name, register }) {
     this._name = name;
     this._changeEventHandle = register(this);
     this._isChangeEventSwitchOn = true;
-    this._childLInterfaces = {};
+    this._childCollectors = {};
 
     this.getName = this.getName.bind(this);
     this.setChangeEventSwitchOn = this.setChangeEventSwitchOn.bind(this);
@@ -65,8 +65,8 @@ class LInterface {
     this.hfuRegister = this.hfuRegister.bind(this);
     this.hfuUnregister = this.hfuUnregister.bind(this);
 
-    this.childInterfaceRegister = this.childInterfaceRegister.bind(this);
-    this.childInterfaceUnregister = this.childInterfaceUnregister.bind(this);
+    this.childCollectorRegister = this.childCollectorRegister.bind(this);
+    this.childCollectorUnregister = this.childCollectorUnregister.bind(this);
 
     this.handleTree = this.handleTree.bind(this);
     this.valueAndHandleTree = this.valueAndHandleTree.bind(this);
@@ -98,25 +98,25 @@ class LInterface {
     this.hfu = undefined;
   };
 
-  childInterfaceRegister(childLInterface) {
-    if (this._childLInterfaces[childLInterface.getName()]) {
+  childCollectorRegister(childCollector) {
+    if (this._childCollectors[childCollector.getName()]) {
       if (this.counter === 0) {
         this.counter++;
-        setTimeout(() => this.childInterfaceRegister(childLInterface), 0);
+        setTimeout(() => this.childCollectorRegister(childCollector), 0);
       } else {
         // eslint-disable-next-line
-        throw 'Name of child logic interface is NOT unique.';
+        throw 'Name of child collector is NOT unique.';
       }
     } else {
-      this._childLInterfaces[childLInterface.getName()] = childLInterface;
+      this._childCollectors[childCollector.getName()] = childCollector;
       this.counter = 0;
     };
     return this.changeEveneHandle;
   };
 
-  childInterfaceUnregister(childLInterface) {
-    this._childLInterfaces[childLInterface.getName()] = undefined;
-    return childLInterface;
+  childCollectorUnregister(childCollector) {
+    this._childCollectors[childCollector.getName()] = undefined;
+    return childCollector;
   };
 
   handleTree() {
@@ -128,4 +128,4 @@ class LInterface {
   }
 }
 
-export default LInterface;
+export default Collector;

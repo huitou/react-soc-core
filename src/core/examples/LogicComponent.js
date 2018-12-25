@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 
-import LInterface from "../LInterface";
-import { withLInterface } from "../withLInterface";
+import Collector from "../Collector";
+import { withCollector } from "../withCollector";
 
 const NAME = 'LogicComponent';
 
@@ -26,11 +26,11 @@ class LogicComponent extends Component {
   render() {
     const { level } = this.props;
     // console.log('orginal rende() at level ', level);
-    const Nested = withLInterface(LInterface)(LogicComponent);
+    const Nested = withCollector(Collector)(LogicComponent);
     const nestedLdConfig = {
       name: `Nested-${NAME}`,
-      register: this.lInterface.childInterfaceRegister,
-      unregister: this.lInterface.childInterfaceUnregister,
+      register: this.collector.childCollectorRegister,
+      unregister: this.collector.childCollectorUnregister,
     };
 
     return (
