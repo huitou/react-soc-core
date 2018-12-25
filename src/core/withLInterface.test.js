@@ -9,7 +9,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { shallow, mount } from "enzyme";
 
-import LInterface from "./LInterface";
+import Collector from "./Collector";
 import { withLInterface } from "./withLInterface";
 
 let rootlInterface;
@@ -49,7 +49,7 @@ class LogicComponent extends Component {
   render() {
     const { level } = this.props;
     // console.log('orginal rende() at level ', level);
-    const Nested = withLInterface(LInterface)(LogicComponent);
+    const Nested = withLInterface(Collector)(LogicComponent);
     const nestedLdConfig = {
       name: `Nested-${NAME}`,
       register: this.lInterface.childInterfaceRegister,
@@ -65,16 +65,16 @@ class LogicComponent extends Component {
 }
 
 describe("withLInterface function", () => {
-  describe("when called with a LInterface class parameter", () => {
+  describe("when called with a Collector class parameter", () => {
     it("returns a wrapper function", () => {
-      const wrapperFunction = withLInterface(LInterface);
+      const wrapperFunction = withLInterface(Collector);
       expect(typeof wrapperFunction).toBe('function');
     });
   });
 
   describe("when the returned wrapper function is called", () => {
     it("returns a function component", () => {
-      const FunctionComponent = withLInterface(LInterface)(LogicComponent);
+      const FunctionComponent = withLInterface(Collector)(LogicComponent);
       expect(typeof FunctionComponent).toBe('function');
     });
   });
@@ -83,7 +83,7 @@ describe("withLInterface function", () => {
     let FunctionComponent, enzymeWrapper, enzymeWrapper_ExtendedComponent;
     beforeEach(() => {
       rootlInterface = undefined;
-      FunctionComponent = withLInterface(LInterface)(LogicComponent);
+      FunctionComponent = withLInterface(Collector)(LogicComponent);
       enzymeWrapper = mount(<FunctionComponent ldConfig={rootLdConfig} level={LEVEL} />);
       enzymeWrapper_ExtendedComponent = enzymeWrapper.find('ExtendedComponent');
     });
@@ -128,7 +128,7 @@ describe("withLInterface function", () => {
   describe("when the function component is unmounted", () => {
     it("lInterface's hfu is unregistered", () => {
       rootlInterface = undefined;
-      const FunctionComponent = withLInterface(LInterface)(LogicComponent);
+      const FunctionComponent = withLInterface(Collector)(LogicComponent);
       const enzymeWrapper = mount(<FunctionComponent ldConfig={rootLdConfig} level={LEVEL} />);
       enzymeWrapper.unmount();
 

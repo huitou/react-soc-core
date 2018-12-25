@@ -4,7 +4,8 @@ import { LInterfacedSimpleLogicComponent1, LInterfacedSimpleLogicComponent2 } fr
 
 let counter = 0;
 const changeEventHandle = () => {
-  console.log(`Example2 - Change event number ${++counter}`);
+  // console.log(`Example2 - Change event number ${++counter}`);
+  // console.log('rootlInterface:', rootlInterface);
 };
 
 // eslint-disable-next-line

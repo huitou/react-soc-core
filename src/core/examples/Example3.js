@@ -3,7 +3,8 @@ import { LInterfacedCompositeLogicComponent } from './LInterfacedLogicComponents
 
 let counter = 0;
 const changeEventHandle = () => {
-  console.log(`Example3 - Change event number ${++counter}`);
+  // console.log(`Example3 - Change event number ${++counter}`);
+  // console.log('rootlInterface:', rootlInterface);
 };
 
 // eslint-disable-next-line

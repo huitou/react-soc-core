@@ -5,18 +5,18 @@
   Licensed under the MIT License. See LICENSE file in the project root for full license information.
 */
 
-import LInterface from './LInterface';
+import Collector from './Collector';
 
 const NAME = 'TestInterface';
 const parentChangeEventHandleMock = jest.fn();
 const parentRegisterMock = jest.fn().mockReturnValue(parentChangeEventHandleMock);
 
-describe('LInterface', () => {
+describe('Collector', () => {
     describe('instance, when properly instantiated with an object parameter,', () => {
         
         let interfaceInstance
         beforeEach(() => {
-            interfaceInstance = new LInterface({ name: NAME, register: parentRegisterMock });
+            interfaceInstance = new Collector({ name: NAME, register: parentRegisterMock });
         })
         afterEach(() => {
             jest.clearAllMocks();

@@ -5,9 +5,9 @@
   Licensed under the MIT License. See LICENSE file in the project root for full license information.
 */
 
-import LInterface from '../LInterface';
+import Collector from '../Collector';
 
-export default class LISimpleLogic extends LInterface {
+export default class LISimpleLogic extends Collector {
     static handleMap = {
         hfu: {
             hifu: { value: 'getTestState' },

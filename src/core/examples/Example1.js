@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-import LInterface from '../LInterface';
+import Collector from '../Collector';
 import { withLInterface } from '../withLInterface';
 
 import LogicComponent from './LogicComponent';
 
 let counter = 0;
 const changeEventHandle = () => {
-  console.log(`Example1 - Change event number ${++counter}`);
+  // console.log(`Example1 - Change event number ${++counter}`);
+  // console.log('rootlInterface:', rootlInterface);
 };
 
 // eslint-disable-next-line
@@ -24,7 +25,7 @@ const ldConfig = {
   register,
 }
 
-const InterfacedLogicComponent = withLInterface(LInterface)(LogicComponent);
+const InterfacedLogicComponent = withLInterface(Collector)(LogicComponent);
 
 const Example1 = (props) => (
   <div>

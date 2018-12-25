@@ -1,6 +1,6 @@
 import { withLInterface } from '../withLInterface';
-import LInterface from "../LInterface";
+import Collector from "../Collector";
 
-const LInterfaceWrapper = withLInterface(LInterface);
+const LInterfaceWrapper = withLInterface(Collector);
 
 export default LInterfaceWrapper;

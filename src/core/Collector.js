@@ -35,7 +35,7 @@ const getValueAndHandleNode = (inputNode) => {
   return outputNode;
 }
 
-class LInterface {
+class Collector {
   /*
     Mandatory declaration, overridable.
   */
@@ -48,7 +48,7 @@ class LInterface {
 
   /*
     Constructor expects a configuration object of the following shape:
-      { register: (LInterface) => () => any, name: string }
+      { register: (Collector) => () => any, name: string }
   */
 
   constructor({ name, register }) {
@@ -128,4 +128,4 @@ class LInterface {
   }
 }
 
-export default LInterface;
+export default Collector;
