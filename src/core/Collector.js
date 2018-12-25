@@ -98,25 +98,25 @@ class Collector {
     this.hfu = undefined;
   };
 
-  childCollectorRegister(childLInterface) {
-    if (this._childCollectors[childLInterface.getName()]) {
+  childCollectorRegister(childCollector) {
+    if (this._childCollectors[childCollector.getName()]) {
       if (this.counter === 0) {
         this.counter++;
-        setTimeout(() => this.childCollectorRegister(childLInterface), 0);
+        setTimeout(() => this.childCollectorRegister(childCollector), 0);
       } else {
         // eslint-disable-next-line
         throw 'Name of child collector is NOT unique.';
       }
     } else {
-      this._childCollectors[childLInterface.getName()] = childLInterface;
+      this._childCollectors[childCollector.getName()] = childCollector;
       this.counter = 0;
     };
     return this.changeEveneHandle;
   };
 
-  childCollectorUnregister(childLInterface) {
-    this._childCollectors[childLInterface.getName()] = undefined;
-    return childLInterface;
+  childCollectorUnregister(childCollector) {
+    this._childCollectors[childCollector.getName()] = undefined;
+    return childCollector;
   };
 
   handleTree() {

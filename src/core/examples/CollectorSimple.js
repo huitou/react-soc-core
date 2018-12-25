@@ -7,7 +7,7 @@
 
 import Collector from '../Collector';
 
-export default class LISimpleLogic extends Collector {
+export default class CollectorSimple extends Collector {
     static handleMap = {
         hfu: {
             hifu: { value: 'getTestState' },
