@@ -9,7 +9,6 @@
 */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
 export const connect = (Model, name) => (WrappedComponent) => {
     class Wrapper extends React.Component {

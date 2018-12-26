@@ -7,7 +7,7 @@
   See LICENSE file in the project root for full license information.
 */
 
-import React, { Component } from "react";
+import { Component } from "react";
 import PropTypes from 'prop-types';
 
 export default class CounterLogic extends Component {
