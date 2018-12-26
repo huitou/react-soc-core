@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
 
 import {
   CollectedSimpleLogicComponent1,
@@ -14,10 +13,6 @@ const CollectedSimpleLogicComponent2 = CollectorWrapper(SimpleLogicComponent2);
 const NAME = 'CompositeLogicComponent';
 
 class CompositeLogicComponent extends Component {
-  static propTypes = {
-    ldConfig: PropTypes.object.isRequired,
-  };
-
   state = { test: true };
 
   handleClick = () => {

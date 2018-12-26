@@ -6,7 +6,7 @@ import { withCollector } from '../withCollector';
 
 import LogicComponent from './LogicComponent';
 
-let counter = 0;
+// let counter = 0;
 const changeEventHandle = () => {
   // console.log(`Example1 - Change event number ${++counter}`);
   // console.log('rootCollector:', rootCollector);

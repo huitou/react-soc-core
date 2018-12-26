@@ -8,13 +8,8 @@
 */
 
 import { Component } from "react";
-import PropTypes from 'prop-types';
 
 export default class CounterLogic extends Component {
-  static propTypes = {
-    ldConfig: PropTypes.object.isRequired,
-  };
-
   constructor(props) {
     super(props);
     this.state = { count: 0 };

@@ -8,7 +8,6 @@ const NAME = 'LogicComponent';
 
 class LogicComponent extends Component {
   static propTypes = {
-    ldConfig: PropTypes.object.isRequired,
     level: PropTypes.number,
   };
   static defaultProps = {

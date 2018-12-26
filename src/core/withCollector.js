@@ -6,9 +6,14 @@
 */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const withCollector = (Collector) => (WrappedComponent) => {
   class ExtendedComponent extends WrappedComponent {
+    static propTypes = {
+      ldConfig: PropTypes.object.isRequired,
+    };
+
     constructor(props) {
       super(props);
       // console.log('extended constructor at level ', this.props.level);

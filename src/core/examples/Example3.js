@@ -1,7 +1,7 @@
 import React from "react";
 import { CollectedCompositeLogicComponent } from './CollectedLogicComponents';
 
-let counter = 0;
+// let counter = 0;
 const changeEventHandle = () => {
   // console.log(`Example3 - Change event number ${++counter}`);
   // console.log('rootCollector:', rootCollector);
