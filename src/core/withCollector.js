@@ -2,6 +2,7 @@
   This is the attacher used to put a Collector instance into/onto a model component.
 
   Copyright (c) 2018 Riverside Software Engineering Ltd. All rights reserved.
+
   Licensed under the MIT License. See LICENSE file in the project root for full license information.
 */
 
@@ -11,7 +12,11 @@ import PropTypes from 'prop-types';
 export const withCollector = (Collector) => (WrappedComponent) => {
   class ExtendedComponent extends WrappedComponent {
     static propTypes = {
-      ldConfig: PropTypes.object.isRequired,
+      ldConfig: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        register: PropTypes.func.isRequired,
+        unregister: PropTypes.func,
+      }).isRequired,
     };
 
     constructor(props) {
