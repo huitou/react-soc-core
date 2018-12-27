@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 export const withCollector = (Collector) => (LogicComponent) => {
     class ExtendedComponent extends LogicComponent {
         static propTypes = {
-            ldConfig: PropTypes.shape({
+            hset: PropTypes.shape({
                 name: PropTypes.string.isRequired,
                 register: PropTypes.func.isRequired,
                 unregister: PropTypes.func,
@@ -22,7 +22,7 @@ export const withCollector = (Collector) => (LogicComponent) => {
         constructor(props) {
             super(props);
             // console.log('extended constructor at level ', this.props.level);
-            this.collector = new Collector(props.ldConfig);
+            this.collector = new Collector(props.hset);
         }
 
         render() {
@@ -64,7 +64,7 @@ export const withCollector = (Collector) => (LogicComponent) => {
         }
 
         componentWillUnmount() {
-            const { unregister } = this.props.ldConfig;
+            const { unregister } = this.props.hset;
             // console.log('extended componentWillUnmount at level ', this.props.level);
             this.collector.hfuUnregister();
             unregister && unregister(this.collector);

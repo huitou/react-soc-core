@@ -22,12 +22,12 @@ class CompositeLogicComponent extends Component {
   };
 
   render() {
-    const ldConfig1 = {
+    const hset1 = {
       name: 'Child-1',
       register: this.collector.childCollectorRegister,
       unregister: this.collector.childCollectorUnregister,
     };
-    const ldConfig2 = {
+    const hset2 = {
       name: 'Child-2',
       register: this.collector.childCollectorRegister,
       unregister: this.collector.childCollectorUnregister,
@@ -39,8 +39,8 @@ class CompositeLogicComponent extends Component {
     return (
       <div className='compositeLogicComponent'>
         <div onClick={this.handleClick}>{`${NAME}`}</div>
-        <CollectedSimpleLogicComponent1 ldConfig={ldConfig1} />
-        <CollectedSimpleLogicComponent2 ldConfig={ldConfig2} />
+        <CollectedSimpleLogicComponent1 hset={hset1} />
+        <CollectedSimpleLogicComponent2 hset={hset2} />
       </div>)
     ;
   }

@@ -33,13 +33,13 @@ export const connect = (ModelComponent, name) => (TargetComponent) => {
             return changeEventHandle;
         };
 
-        const ldConfig = { name, register };
+        const hset = { name, register };
         const getCollector = () => root.collector;
 
         return (
             <React.Fragment>
                 <Wrapper {...props} ref={root.ref} getCollector={getCollector} />
-                <ModelComponent {...props} ldConfig={ldConfig} />
+                <ModelComponent {...props} hset={hset} />
             </React.Fragment>
         );
     };

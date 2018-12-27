@@ -20,7 +20,7 @@ const parentRegisterMock = jest.fn((collectorInstance) => {
     rootCollector = collectorInstance;
     return parentChangeEventHandleMock;
 });
-const rootLdConfig = {
+const rootHset = {
     name: NAME,
     register: parentRegisterMock,
 }
@@ -51,7 +51,7 @@ class LogicComponent extends Component {
         const { level } = this.props;
         // console.log('orginal rende() at level ', level);
         const Nested = withCollector(Collector)(LogicComponent);
-        const nestedLdConfig = {
+        const nestedHset = {
             name: `Nested-${NAME}`,
             register: this.collector.childCollectorRegister,
             unregister: this.collector.childCollectorUnregister,
@@ -59,7 +59,7 @@ class LogicComponent extends Component {
 
         return (
             <div className={ level ? `test-level${level}` : 'test'} onClick={this.handleClick}>
-                { level ? <Nested ldConfig={nestedLdConfig} level={ level - 1 } /> : null }
+                { level ? <Nested hset={nestedHset} level={ level - 1 } /> : null }
             </div>
         );
     }
@@ -85,7 +85,7 @@ describe("withCollector function", () => {
         beforeEach(() => {
             rootCollector = undefined;
             FunctionComponent = withCollector(Collector)(LogicComponent);
-            enzymeWrapper = mount(<FunctionComponent ldConfig={rootLdConfig} level={LEVEL} />);
+            enzymeWrapper = mount(<FunctionComponent hset={rootHset} level={LEVEL} />);
             enzymeWrapper_ExtendedComponent = enzymeWrapper.find('ExtendedComponent');
         });
         afterEach(() => {
@@ -100,7 +100,7 @@ describe("withCollector function", () => {
         it("render an extended component passing collector prop", () => {
             expect(enzymeWrapper_ExtendedComponent.length).toBe(LEVEL + 1);
             expect(enzymeWrapper_ExtendedComponent.first().prop('collector')).not.toBeDefined();
-            expect(enzymeWrapper_ExtendedComponent.first().prop('ldConfig')).toBeDefined();
+            expect(enzymeWrapper_ExtendedComponent.first().prop('hset')).toBeDefined();
         });
 
         it("parentRegister is called", () => {
@@ -130,7 +130,7 @@ describe("withCollector function", () => {
         it("collector's hfu is unregistered", () => {
             rootCollector = undefined;
             const FunctionComponent = withCollector(Collector)(LogicComponent);
-            const enzymeWrapper = mount(<FunctionComponent ldConfig={rootLdConfig} level={LEVEL} />);
+            const enzymeWrapper = mount(<FunctionComponent hset={rootHset} level={LEVEL} />);
             enzymeWrapper.unmount();
 
             expect(rootCollector.hfu).not.toBeDefined();
