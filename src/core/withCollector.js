@@ -22,12 +22,21 @@ export const withCollector = (Collector) => (LogicComponent) => {
         constructor(props) {
             super(props);
             // console.log('extended constructor at level ', this.props.level);
-            this.collector = new Collector(props.hset);
+            this._collector = new Collector(props.hset);
+            this.hset = this.hset.bind(this);
+        }
+
+        hset(name) {
+            return {
+                name,
+                register: this._collector.childCollectorRegister,
+                unregister: this._collector.childCollectorUnregister,
+            };
         }
 
         render() {
             // console.log('extended rende() at level ', this.props.level);
-            this.collector.setChangeEventSwitchOff();
+            this._collector.setChangeEventSwitchOff();
             return super.render && super.render();
         }
 
@@ -49,25 +58,25 @@ export const withCollector = (Collector) => (LogicComponent) => {
                     hfu.hefu
                 );
 
-                this.collector.hfuRegister(hfu);
+                this._collector.hfuRegister(hfu);
             }
 
-            this.collector.setChangeEventSwitchOn();
-            this.collector.changeEveneHandle();
+            this._collector.setChangeEventSwitchOn();
+            this._collector.changeEveneHandle();
         }
 
         componentDidUpdate() {
             // console.log('extended componentDidUpdate at level ', this.props.level);
             super.componentDidUpdate && super.componentDidUpdate();
-            this.collector.setChangeEventSwitchOn();
-            this.collector.changeEveneHandle();
+            this._collector.setChangeEventSwitchOn();
+            this._collector.changeEveneHandle();
         }
 
         componentWillUnmount() {
             const { unregister } = this.props.hset;
             // console.log('extended componentWillUnmount at level ', this.props.level);
-            this.collector.hfuUnregister();
-            unregister && unregister(this.collector);
+            this._collector.hfuUnregister();
+            unregister && unregister(this._collector);
             super.componentWillUnmount && super.componentWillUnmount();
         }
     }

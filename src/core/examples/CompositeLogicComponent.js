@@ -22,25 +22,11 @@ class CompositeLogicComponent extends Component {
   };
 
   render() {
-    const hset1 = {
-      name: 'Child-1',
-      register: this.collector.childCollectorRegister,
-      unregister: this.collector.childCollectorUnregister,
-    };
-    const hset2 = {
-      name: 'Child-2',
-      register: this.collector.childCollectorRegister,
-      unregister: this.collector.childCollectorUnregister,
-    };
-
-    // This choice makes every time a new CollectedSimpleLogicComponent2 class hence unmounting the previous.
-    // const CollectedSimpleLogicComponent2 = CollectorWrapper(SimpleLogicComponent2);
-
     return (
       <div className='compositeLogicComponent'>
         <div onClick={this.handleClick}>{`${NAME}`}</div>
-        <CollectedSimpleLogicComponent1 hset={hset1} />
-        <CollectedSimpleLogicComponent2 hset={hset2} />
+        <CollectedSimpleLogicComponent1 hset={this.hset('Child-1')} />
+        <CollectedSimpleLogicComponent2 hset={this.hset('Child-2')} />
       </div>)
     ;
   }

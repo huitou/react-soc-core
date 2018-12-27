@@ -26,18 +26,13 @@ class LogicComponent extends Component {
     const { level } = this.props;
     // console.log('orginal rende() at level ', level);
     const Nested = withCollector(Collector)(LogicComponent);
-    const nestedHset = {
-      name: `Nested-${NAME}`,
-      register: this.collector.childCollectorRegister,
-      unregister: this.collector.childCollectorUnregister,
-    };
 
     return (
       <div>
         <div className={ level ? `test-level${level}` : 'test'} onClick={this.handleClick}>
           {`${NAME}-Level-${level}`}
         </div>
-        { level ? <Nested hset={nestedHset} level={ level - 1 } /> : null }
+        { level ? <Nested hset={this.hset(`Nested-${NAME}`)} level={ level - 1 } /> : null }
       </div>)
     ;
   }
