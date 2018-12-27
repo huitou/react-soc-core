@@ -1,21 +1,19 @@
 /*
-  This is used to connect a model component instance to a React component
-  and to inject values and handles provided by the model.
+    It connects a model component to a target component and inject provided values and handles.
 
-  Copyright (c) 2018 Riverside Software Engineering Ltd. All rights reserved.
+    Copyright (c) 2018 Riverside Software Engineering Ltd. All rights reserved.
 
-  Licensed under the MIT License.
-  See LICENSE file in the project root for full license information.
+    Licensed under the MIT License. See LICENSE file in the project root for full license information.
 */
 
 import React from 'react';
 
-export const connect = (Model, name) => (WrappedComponent) => {
+export const connect = (ModelComponent, name) => (TargetComponent) => {
     class Wrapper extends React.Component {
         render() {
             const collector = this.props.getCollector();
             return collector
-                ? <WrappedComponent {...this.props} {...collector.valueAndHandleTree()} />
+                ? <TargetComponent {...this.props} {...collector.valueAndHandleTree()} />
                 : null;
         }
     }
@@ -41,7 +39,7 @@ export const connect = (Model, name) => (WrappedComponent) => {
         return (
             <React.Fragment>
                 <Wrapper {...props} ref={root.ref} getCollector={getCollector} />
-                <Model {...props} ldConfig={ldConfig} />
+                <ModelComponent {...props} ldConfig={ldConfig} />
             </React.Fragment>
         );
     };
