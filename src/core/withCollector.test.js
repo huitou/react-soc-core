@@ -81,7 +81,7 @@ describe("withCollector function", () => {
             rootCollector = undefined;
             FunctionComponent = withCollector(Collector)(LogicComponent);
             enzymeWrapper = mount(<FunctionComponent hset={rootHset} level={LEVEL} />);
-            enzymeWrapper_ExtendedComponent = enzymeWrapper.find('ExtendedComponent');
+            enzymeWrapper_ExtendedComponent = enzymeWrapper.find('LogicComponent');
         });
         afterEach(() => {
             jest.clearAllMocks();

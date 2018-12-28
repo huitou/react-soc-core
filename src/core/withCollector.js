@@ -9,6 +9,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+function getDisplayName(WrappedComponent) {
+    return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+}
+
 export const withCollector = (Collector) => (LogicComponent) => {
     class ExtendedComponent extends LogicComponent {
         static propTypes = {
@@ -80,8 +84,12 @@ export const withCollector = (Collector) => (LogicComponent) => {
             super.componentWillUnmount && super.componentWillUnmount();
         }
     }
+    ExtendedComponent.displayName = `${getDisplayName(LogicComponent)}`;
 
-    return (props) => {
+    const HCollector = (props) => {
         return (<ExtendedComponent {...props} />);
-    }
+    };
+    HCollector.displayName = `HCollect(${getDisplayName(LogicComponent)})`;
+
+    return HCollector;
 }

@@ -75,7 +75,7 @@ describe("connect function", () => {
 
         it("render the logic component and a Wrapper component with the wrapped visual component", () => {
             expect(enzymeWrapper.find('.simpleLogicComponent3').length).toBe(1);
-            expect(enzymeWrapper.find('Wrapper').length).toBe(1);
+            expect(enzymeWrapper.find('HInject(VisualComponent)').length).toBe(1);
             expect(enzymeWrapper.find('VisualComponent').length).toBe(1);
         });
 

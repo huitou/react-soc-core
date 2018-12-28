@@ -8,8 +8,12 @@
 
 import React from 'react';
 
+function getDisplayName(WrappedComponent) {
+    return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+}
+
 export const connect = (ModelComponent, name) => (TargetComponent) => {
-    class Wrapper extends React.Component {
+    class HInjector extends React.Component {
         render() {
             const collector = this.props.getCollector();
             return collector
@@ -18,7 +22,9 @@ export const connect = (ModelComponent, name) => (TargetComponent) => {
         }
     }
 
-    return (props) => {
+    HInjector.displayName = `HInject(${getDisplayName(TargetComponent)})`;
+
+    const HConnect = (props) => {
         const root = {
             collector: undefined,
             ref: React.createRef(),
@@ -38,9 +44,11 @@ export const connect = (ModelComponent, name) => (TargetComponent) => {
 
         return (
             <React.Fragment>
-                <Wrapper {...props} ref={root.ref} getCollector={getCollector} />
+                <HInjector {...props} ref={root.ref} getCollector={getCollector} />
                 <ModelComponent {...props} hset={hset} />
             </React.Fragment>
         );
     };
+
+    return HConnect;
 };
