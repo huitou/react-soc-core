@@ -21,8 +21,7 @@ export const connect = (ModelComponent, name) => (TargetComponent) => {
                 : null;
         }
     }
-
-    HInjector.displayName = `HInject(${getDisplayName(TargetComponent)})`;
+    HInjector.displayName = `hInject(${getDisplayName(TargetComponent)})`;
 
     const HConnect = (props) => {
         const root = {
@@ -49,6 +48,7 @@ export const connect = (ModelComponent, name) => (TargetComponent) => {
             </React.Fragment>
         );
     };
+    HConnect.displayName = `hConnect(${getDisplayName(TargetComponent)})`;
 
     return HConnect;
 };

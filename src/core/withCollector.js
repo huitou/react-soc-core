@@ -89,7 +89,7 @@ export const withCollector = (Collector) => (LogicComponent) => {
     const HCollector = (props) => {
         return (<ExtendedComponent {...props} />);
     };
-    HCollector.displayName = `HCollect(${getDisplayName(LogicComponent)})`;
+    HCollector.displayName = `hCollect(${getDisplayName(LogicComponent)})`;
 
     return HCollector;
 }
