@@ -17,7 +17,7 @@ export const connect = (ModelComponent, name) => (TargetComponent) => {
         render() {
             const collector = this.props.getCollector();
             return collector
-                ? <TargetComponent {...this.props} {...collector.valueAndHandleTree()} />
+                ? <TargetComponent {...this.props} getCollector={undefined} {...collector.valueAndHandleTree()} />
                 : null;
         }
     }
