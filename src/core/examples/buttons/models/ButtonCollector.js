@@ -1,5 +1,5 @@
 /*
-    CounterCollector - A collector of handles
+    ButtonCollector - A collector of handles
 
     Copyright (c) 2018 Riverside Software Engineering Ltd. All rights reserved.
 
@@ -8,10 +8,10 @@
 
 import Collector from '../../../Collector';
 
-export default class CounterCollector extends Collector {
+export default class ButtonCollector extends Collector {
     static handleMap = {
         hfu: {
-            hifu: { value: 'value' },
+            hifu: { enabled: 'enabled' },
             hefu: { click: 'click' },
         },
     };

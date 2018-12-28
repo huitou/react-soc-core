@@ -2,7 +2,7 @@ import React from "react";
 
 import { CollectedSimpleLogicComponent1, CollectedSimpleLogicComponent2 } from './CollectedLogicComponents';
 
-let counter = 0;
+// let counter = 0;
 const changeEventHandle = () => {
   // console.log(`Example2 - Change event number ${++counter}`);
   // console.log('rootCollector:', rootCollector);
@@ -16,7 +16,7 @@ const register = (collectorInstance) => {
 };
 
 const name = 'RootCollector';
-const ldConfig = {
+const hset = {
   name,
   register,
 }
@@ -24,9 +24,9 @@ const ldConfig = {
 const Example2 = (props) => (
   <div>
     <div>Example 2 - Collected simple logic component Siblings.</div>
-    <CollectedSimpleLogicComponent1 ldConfig={ldConfig} />
-    <CollectedSimpleLogicComponent2 ldConfig={ldConfig} />
-    <CollectedSimpleLogicComponent1 ldConfig={ldConfig} />
+    <CollectedSimpleLogicComponent1 hset={hset} />
+    <CollectedSimpleLogicComponent2 hset={hset} />
+    <CollectedSimpleLogicComponent1 hset={hset} />
   </div>
 );
 

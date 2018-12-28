@@ -1,11 +1,12 @@
 /*
-    CounterModel - A pure model component
+    ButtonModels - A set of pure model component
 
     Copyright (c) 2018 Riverside Software Engineering Ltd. All rights reserved.
 
     Licensed under the MIT License. See LICENSE file in the project root for full license information.
 */
 
-import CounterModel from './CounterModel';
+import ButtonModel, { TimedEnableButtonModel } from './ButtonModels';
 
-export default CounterModel;
+export default ButtonModel;
+export { TimedEnableButtonModel };

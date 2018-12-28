@@ -1,27 +1,29 @@
 /*
-  This is used to connect a model component instance to a React component
-  and to inject values and handles provided by the model.
+    It connects a model component to a target component and inject provided values and handles.
 
-  Copyright (c) 2018 Riverside Software Engineering Ltd. All rights reserved.
+    Copyright (c) 2018 Riverside Software Engineering Ltd. All rights reserved.
 
-  Licensed under the MIT License.
-  See LICENSE file in the project root for full license information.
+    Licensed under the MIT License. See LICENSE file in the project root for full license information.
 */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
-export const connect = (Model, name) => (WrappedComponent) => {
-    class Wrapper extends React.Component {
+function getDisplayName(WrappedComponent) {
+    return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+}
+
+export const connect = (ModelComponent, name) => (TargetComponent) => {
+    class HInjector extends React.Component {
         render() {
             const collector = this.props.getCollector();
             return collector
-                ? <WrappedComponent {...this.props} {...collector.valueAndHandleTree()} />
+                ? <TargetComponent {...this.props} getCollector={undefined} {...collector.valueAndHandleTree()} />
                 : null;
         }
     }
+    HInjector.displayName = `hInject(${getDisplayName(TargetComponent)})`;
 
-    return (props) => {
+    const HConnect = (props) => {
         const root = {
             collector: undefined,
             ref: React.createRef(),
@@ -36,14 +38,17 @@ export const connect = (Model, name) => (WrappedComponent) => {
             return changeEventHandle;
         };
 
-        const ldConfig = { name, register };
+        const hset = { name, register };
         const getCollector = () => root.collector;
 
         return (
             <React.Fragment>
-                <Wrapper {...props} ref={root.ref} getCollector={getCollector} />
-                <Model {...props} ldConfig={ldConfig} />
+                <HInjector {...props} ref={root.ref} getCollector={getCollector} />
+                <ModelComponent {...props} hset={hset} />
             </React.Fragment>
         );
     };
+    HConnect.displayName = `hConnect(${getDisplayName(TargetComponent)})`;
+
+    return HConnect;
 };

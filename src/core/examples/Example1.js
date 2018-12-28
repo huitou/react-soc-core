@@ -6,7 +6,7 @@ import { withCollector } from '../withCollector';
 
 import LogicComponent from './LogicComponent';
 
-let counter = 0;
+// let counter = 0;
 const changeEventHandle = () => {
   // console.log(`Example1 - Change event number ${++counter}`);
   // console.log('rootCollector:', rootCollector);
@@ -20,7 +20,7 @@ const register = (collectorInstance) => {
 };
 
 const name = 'RootCollector';
-const ldConfig = {
+const hset = {
   name,
   register,
 }
@@ -30,7 +30,7 @@ const CollectedLogicComponent = withCollector(Collector)(LogicComponent);
 const Example1 = (props) => (
   <div>
     <div>Example 1 - Nested Collected Component - Parent-Child.</div>
-    <CollectedLogicComponent ldConfig={ldConfig} level={props.level}/>
+    <CollectedLogicComponent hset={hset} level={props.level}/>
   </div>
 );
 

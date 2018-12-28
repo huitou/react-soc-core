@@ -1,13 +1,8 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
 
 const NAME = 'SimpleLogicComponent3';
 
 class SimpleLogicComponent3 extends Component {
-  static propTypes = {
-    ldConfig: PropTypes.object.isRequired,
-  };
-
   constructor(props) {
     super(props);
     this.getTestState = this.getTestState.bind(this);

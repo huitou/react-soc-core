@@ -1,8 +1,9 @@
 /*
-  Testing for Connector.
+    Testing for Connector.
 
-  Copyright (c) 2018 Riverside Software Engineering Ltd. All rights reserved.
-  Licensed under the MIT License. See LICENSE file in the project root for full license information.
+    Copyright (c) 2018 Riverside Software Engineering Ltd. All rights reserved.
+
+    Licensed under the MIT License. See LICENSE file in the project root for full license information.
 */
 
 import React, { Component } from "react";
@@ -14,8 +15,12 @@ import { connect } from './connect';
 
 class VisualComponent extends Component {
     static propTypes = {
-        hifu: PropTypes.object.isRequired,
-        hefu: PropTypes.object.isRequired,
+        hifu: PropTypes.shape({
+            value: PropTypes.bool.isRequired,
+        }).isRequired,
+        hefu: PropTypes.shape({
+            click: PropTypes.func.isRequired,
+        }).isRequired,
     };
 
     constructor(props) {
@@ -70,7 +75,7 @@ describe("connect function", () => {
 
         it("render the logic component and a Wrapper component with the wrapped visual component", () => {
             expect(enzymeWrapper.find('.simpleLogicComponent3').length).toBe(1);
-            expect(enzymeWrapper.find('Wrapper').length).toBe(1);
+            expect(enzymeWrapper.find('hInject(VisualComponent)').length).toBe(1);
             expect(enzymeWrapper.find('VisualComponent').length).toBe(1);
         });
 
