@@ -43,8 +43,8 @@ export const connect = (ModelComponent, name) => (TargetComponent) => {
 
         return (
             <React.Fragment>
-                <HInjector {...props} ref={root.ref} getCollector={getCollector} />
-                <ModelComponent {...props} hset={hset} />
+                <HInjector {...props} ref={root.ref} getCollector={getCollector} hprops={undefined} />
+                <ModelComponent {...props.hprops} hset={hset} />
             </React.Fragment>
         );
     };
