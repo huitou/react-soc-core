@@ -1,35 +1,36 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-import LInterface from '../LInterface';
-import { withLInterface } from '../withLInterface';
+import Collector from '../Collector';
+import { withCollector } from '../withCollector';
 
 import LogicComponent from './LogicComponent';
 
-let counter = 0;
+// let counter = 0;
 const changeEventHandle = () => {
-  console.log(`Example1 - Change event number ${++counter}`);
+  // console.log(`Example1 - Change event number ${++counter}`);
+  // console.log('rootCollector:', rootCollector);
 };
 
 // eslint-disable-next-line
-let rootlInterface;
-const register = (interfaceInstance) => {
-  rootlInterface = interfaceInstance;
+let rootCollector;
+const register = (collectorInstance) => {
+  rootCollector = collectorInstance;
   return changeEventHandle;
 };
 
-const name = 'RootInterface';
-const ldConfig = {
+const name = 'RootCollector';
+const hset = {
   name,
   register,
 }
 
-const InterfacedLogicComponent = withLInterface(LInterface)(LogicComponent);
+const CollectedLogicComponent = withCollector(Collector)(LogicComponent);
 
 const Example1 = (props) => (
   <div>
-    <div>Example 1 - Nested Interfaced Component - Parent-Child.</div>
-    <InterfacedLogicComponent ldConfig={ldConfig} level={props.level}/>
+    <div>Example 1 - Nested Collected Component - Parent-Child.</div>
+    <CollectedLogicComponent hset={hset} level={props.level}/>
   </div>
 );
 

@@ -1,31 +1,32 @@
 import React from "react";
 
-import { LInterfacedSimpleLogicComponent1, LInterfacedSimpleLogicComponent2 } from './LInterfacedLogicComponents';
+import { CollectedSimpleLogicComponent1, CollectedSimpleLogicComponent2 } from './CollectedLogicComponents';
 
-let counter = 0;
+// let counter = 0;
 const changeEventHandle = () => {
-  console.log(`Example2 - Change event number ${++counter}`);
+  // console.log(`Example2 - Change event number ${++counter}`);
+  // console.log('rootCollector:', rootCollector);
 };
 
 // eslint-disable-next-line
-let rootlInterface = [];
-const register = (interfaceInstance) => {
-  rootlInterface.push(interfaceInstance);
+let rootCollector = [];
+const register = (collectorInstance) => {
+  rootCollector.push(collectorInstance);
   return changeEventHandle;
 };
 
-const name = 'RootInterface';
-const ldConfig = {
+const name = 'RootCollector';
+const hset = {
   name,
   register,
 }
 
 const Example2 = (props) => (
   <div>
-    <div>Example 2 - Interfaced simple logic component Siblings.</div>
-    <LInterfacedSimpleLogicComponent1 ldConfig={ldConfig} />
-    <LInterfacedSimpleLogicComponent2 ldConfig={ldConfig} />
-    <LInterfacedSimpleLogicComponent1 ldConfig={ldConfig} />
+    <div>Example 2 - Collected simple logic component Siblings.</div>
+    <CollectedSimpleLogicComponent1 hset={hset} />
+    <CollectedSimpleLogicComponent2 hset={hset} />
+    <CollectedSimpleLogicComponent1 hset={hset} />
   </div>
 );
 
