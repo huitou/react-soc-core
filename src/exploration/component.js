@@ -6,11 +6,11 @@
     Licensed under the MIT License. See LICENSE file in the project root for full license information.
 */
 
-import React, { Component } from 'react';
+import React from 'react';
 import { object } from 'prop-types';
 import { mergeDeepRight } from 'ramda';
 
-class ObjectModel extends Component {
+class ObjectModel extends React.Component {
     static propTypes = {
         initial: object
     };
