@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import DoubleConnectedView from './exploration/double-connected-view';
+// import DoubleConnectedView from './exploration/double-connected-view';
+import DoubleConnectedView from './exploration2/double-connected-view';
 
 class App extends Component {
   render() {

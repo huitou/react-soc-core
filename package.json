@@ -5,6 +5,7 @@
   "dependencies": {
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
+    "r-obj-model": "git+https://github.com/huitou/r-obj-model.git",
     "r-socs-core": "git+https://github.com/huitou/r-socs-core.git",
     "ramda": "^0.26.1",
     "react": "^16.4.1",
