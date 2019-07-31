@@ -3,7 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 
 // import DoubleConnectedView from './exploration/double-connected-view';
-import DoubleConnectedView from './exploration2/double-connected-view';
+import DoubleObjectConnectedView from './exploration2/double-connected-view';
+import DoubleListConnectedView from './exploration3/double-connected-view';
 
 class App extends Component {
   render() {
@@ -14,7 +15,8 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <div className="App-intro">
-          <DoubleConnectedView hprops={{ initial: { a: 'a', b: 'b' } }}/>
+          <DoubleObjectConnectedView hprops={{ initial: { a: 'a', b: 'b' } }}/>
+          <DoubleListConnectedView hprops={{ initial: [{ a: 'a1' }, { a: 'a2' }] }}/>
         </div>
       </div>
     );
