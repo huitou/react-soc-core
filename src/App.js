@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-// import Example1 from './core/examples/Example1';
-// import Example2 from './core/examples/Example2';
-// import Example3 from './core/examples/Example3';
-
-import Counter, { DoubleViewCounter } from './core/examples/counter';
+// import DoubleConnectedView from './exploration/double-connected-view';
+import DoubleObjectConnectedView from './exploration2/double-connected-view';
+import DoubleListConnectedView from './exploration3/double-connected-view';
 
 class App extends Component {
   render() {
@@ -17,13 +15,8 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <div className="App-intro">
-          { /*
-            <Example1 level={1} />
-            <Example2 />
-            <Example3 />
-          */ }
-          <Counter />
-          <DoubleViewCounter />
+          <DoubleObjectConnectedView hprops={{ initial: { a: 'a', b: 'b' } }}/>
+          <DoubleListConnectedView hprops={{ initial: [{ a: 'a1' }, { a: 'a2' }] }}/>
         </div>
       </div>
     );
